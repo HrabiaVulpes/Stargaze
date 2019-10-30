@@ -3,8 +3,14 @@ package game.gui;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
+import java.util.Set;
 
 public class MapPanel extends JPanel {
+    Set<System> galaxy;
+
+    public MapPanel(Set<System> galaxy) {
+        this.galaxy = galaxy;
+    }
 
     private void doDrawing(Graphics g) {
 

@@ -10,7 +10,6 @@ public class BaseGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-
         EventQueue.invokeLater(() -> {
             JFrame ex = new BaseGUI();
             ex.setVisible(true);
@@ -22,7 +21,7 @@ public class BaseGUI extends JFrame {
         add(drawPanel);
 
         setSize(350, 250);
-        setTitle("Points");
+        setTitle("Stars");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
