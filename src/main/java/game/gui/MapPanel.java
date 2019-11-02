@@ -21,6 +21,13 @@ public class MapPanel extends JPanel {
             int x = system.getX();
             int y = system.getY();
             g2d.drawLine(x, y, x, y);
+
+            for (System connection : system.getConnections()){
+                int x1 = connection.getX();
+                int y1 = connection.getY();
+
+                g2d.drawLine(x, y, x1, y1);
+            }
         }
     }
 
