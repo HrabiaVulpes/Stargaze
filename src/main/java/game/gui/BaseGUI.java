@@ -1,9 +1,13 @@
 package game.gui;
 
+import game.map.Galaxy;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class BaseGUI extends JFrame {
+    static final int width = 1000;
+    static final int height = 1000;
 
     public BaseGUI() {
         initUI();
@@ -17,10 +21,10 @@ public class BaseGUI extends JFrame {
     }
 
     private void initUI() {
-        JPanel drawPanel = new MapPanel();
+        JPanel drawPanel = new MapPanel(Galaxy.generateGalaxy(width, 1000));
         add(drawPanel);
 
-        setSize(350, 250);
+        setSize(width, 1000);
         setTitle("Stars");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
