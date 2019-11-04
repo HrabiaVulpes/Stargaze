@@ -8,13 +8,13 @@ import game.map.System;
 import java.util.Set;
 
 public class Player {
-   String name;
-   Set<System> systems;
-   Set<Planet> planets;
-   Set<Fortress> fortresses;
-   Set<Ship> ships;
+   public String name;
+   public Set<System> systems;
+   public Set<Planet> planets;
+   public Set<Fortress> fortresses;
+   public Set<Ship> ships;
 
-   Integer money;
+   public Integer money = 0;
 
    public Player(String name) {
       this.name = name;

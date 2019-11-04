@@ -37,7 +37,11 @@ public class Game {
    }
 
    private void economics() {
-
+      for (Player player:players){
+         player.money += player.systems.size();
+         player.money -= player.ships.size();
+         player.money -= player.fortresses.stream().mapToInt(fortress -> fortress.level).sum();
+      }
    }
 
    private void diplomacy() {
