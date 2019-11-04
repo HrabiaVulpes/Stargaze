@@ -1,6 +1,6 @@
 package game.gui;
 
-import game.map.Galaxy;
+import game.map.GalaxyGenerator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +21,7 @@ public class BaseGUI extends JFrame {
     }
 
     private void initUI() {
-        JPanel drawPanel = new MapPanel(Galaxy.generateGalaxy(width, 1000));
+        JPanel drawPanel = new MapPanel(GalaxyGenerator.generateGalaxy(width, 1000));
         add(drawPanel);
 
         setSize(width, 1000);

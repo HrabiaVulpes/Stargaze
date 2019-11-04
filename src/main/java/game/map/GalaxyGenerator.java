@@ -3,7 +3,7 @@ package game.map;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Galaxy {
+public class GalaxyGenerator {
     private static int numberBetween(int a, int b) {
         return (int) (Math.random() * (b - a) + a);
     }

@@ -13,4 +13,16 @@ public class Player {
    Set<Planet> planets;
    Set<Fortress> fortresses;
    Set<Ship> ships;
+
+   Integer money;
+
+   public Player(String name) {
+      this.name = name;
+   }
+
+   public Player(String name, Set<System> systems, Set<Planet> planets) {
+      this.name = name;
+      this.systems = systems;
+      this.planets = planets;
+   }
 }

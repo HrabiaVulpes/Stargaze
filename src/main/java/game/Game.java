@@ -1,7 +1,10 @@
 package game;
 
-import static game.CommonData.continueGame;
-import static game.CommonData.gameSpeed;
+import game.player.Player;
+
+import java.util.HashSet;
+
+import static game.CommonData.*;
 
 public class Game {
    public void mainLoop(){
@@ -25,7 +28,12 @@ public class Game {
    }
 
    private void initData() {
-
+      players = new HashSet<>();
+      players.add(new Player("Red"));
+      players.add(new Player("Green"));
+      players.add(new Player("Blue"));
+      players.add(new Player("Black"));
+      players.add(new Player("White"));
    }
 
    private void economics() {
