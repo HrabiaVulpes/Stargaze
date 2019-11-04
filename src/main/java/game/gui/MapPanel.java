@@ -8,6 +8,7 @@ import game.map.System;
 
 public class MapPanel extends JPanel {
     Set<System> galaxy;
+    int pointSize = 3;
 
     public MapPanel(Set<System> galaxy) {
         this.galaxy = galaxy;
@@ -25,7 +26,7 @@ public class MapPanel extends JPanel {
             for (System connection : system.getConnections()){
                 int x1 = connection.getX();
                 int y1 = connection.getY();
-
+                g2d.fillOval(x-pointSize, y-pointSize, x+pointSize, y+pointSize);
                 g2d.drawLine(x, y, x1, y1);
             }
         }
