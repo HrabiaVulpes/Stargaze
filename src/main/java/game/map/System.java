@@ -1,5 +1,6 @@
 package game.map;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ public class System {
     public System(int x, int y) {
         this.x = x;
         this.y = y;
+        connections = Collections.emptySet();
     }
 
     public Set<System> getConnections() {
