@@ -24,6 +24,10 @@ public class OrderTakeSystem extends Order {
               .filter(ship -> ship.ID.equals(shipID))
               .findFirst().orElseThrow(() -> new OrderError("Ship " + shipID + " not found!"));
 
+      if (orderedShip.orderedAlready) {
+         throw new OrderError("Ship " + shipID + " already moved!");
+      }
+
       StarSystem system = orderedShip.whereIsShip;
       Fortress systemFortress = CommonData.fortresses.stream()
               .filter(fortress -> fortress.whereIsFortress == system)

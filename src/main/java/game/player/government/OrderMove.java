@@ -6,19 +6,24 @@ import game.player.Player;
 import game.ship.Ship;
 
 public class OrderMove extends Order {
-   private String shipId;
+   private String shipID;
    private String destinationID;
 
-   public OrderMove(Player owner, String shipId, String destinationID) {
+   public OrderMove(Player owner, String shipID, String destinationID) {
       super(owner, OrderType.SHIP_MOVE);
-      this.shipId = shipId;
+      this.shipID = shipID;
       this.destinationID = destinationID;
    }
 
    @Override
    public void runOrder() throws OrderError {
-      Ship orderedShip = CommonData.ships.stream().filter(ship -> ship.ID.equals(shipId)).findFirst()
-              .orElseThrow(() -> new OrderError("Ship " + shipId + " not found!"));
+      Ship orderedShip = CommonData.ships.stream().filter(ship -> ship.ID.equals(shipID)).findFirst()
+              .orElseThrow(() -> new OrderError("Ship " + shipID + " not found!"));
+
+      if (orderedShip.orderedAlready) {
+         throw new OrderError("Ship " + shipID + " already moved!");
+      }
+
       StarSystem current = orderedShip.whereIsShip;
       StarSystem destination = CommonData.galaxy.stream().filter(starSystem -> starSystem.ID.equals(destinationID)).findFirst()
               .orElseThrow(() -> new OrderError("Ship " + destinationID + " not found!"));

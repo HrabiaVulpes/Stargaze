@@ -19,6 +19,8 @@ public class OrderPlanetUpgrade extends Order {
               .filter(planet -> planet.ID.equals(planetID))
               .findFirst().orElseThrow(() -> new OrderError("Planet " + planetID + " not found!"));
 
+      if (orderedPlanet.orderedAlready) throw new OrderError("Planet " + planetID + " already moved!");
+
       if (owner.money >= orderedPlanet.level) {
          owner.money -= orderedPlanet.level;
          orderedPlanet.upgrade();

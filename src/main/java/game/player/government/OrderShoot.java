@@ -21,6 +21,10 @@ public class OrderShoot extends Order {
               .filter(ship -> ship.ID.equals(attackerID))
               .findFirst().orElseThrow(() -> new OrderError("Ship " + attackerID + " not found!"));
 
+      if (attacker.orderedAlready) {
+         throw new OrderError("Ship " + attackerID + " already moved!");
+      }
+
       Ship defender = CommonData.ships.stream()
               .filter(ship -> ship.ID.equals(defenderID))
               .findFirst().orElseThrow(() -> new OrderError("Ship " + defenderID + " not found!"));

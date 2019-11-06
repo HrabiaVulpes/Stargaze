@@ -19,8 +19,13 @@ public class OrderFortressDowngrade extends Order {
               .filter(fortress -> fortress.ID.equals(fortressID))
               .findFirst().orElseThrow(() -> new OrderError("Fortress " + fortressID + " not found!"));
 
+      if (orderedFortress.orderedAlready) {
+         throw new OrderError("Fortress " + fortressID + " already moved!");
+      }
+
       if (orderedFortress.level > 0) {
          orderedFortress.downgrade();
+         orderedFortress.orderedAlready = true;
       } else {
          throw new OrderError("Fortress " + fortressID + " is already at level 0");
       }

@@ -19,6 +19,10 @@ public class OrderFortressUpgrade extends Order {
               .filter(fortress -> fortress.ID.equals(fortressID))
               .findFirst().orElseThrow(() -> new OrderError("Fortress " + fortressID + " not found!"));
 
+      if (orderedfortress.orderedAlready) {
+         throw new OrderError("Fortress " + fortressID + " already moved!");
+      }
+
       if (owner.money >= orderedfortress.level) {
          owner.money -= orderedfortress.level;
          orderedfortress.upgrade();
