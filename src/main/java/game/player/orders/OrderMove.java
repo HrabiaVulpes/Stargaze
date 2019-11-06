@@ -26,8 +26,8 @@ public class OrderMove extends Order {
       }
 
       StarSystem current = orderedShip.whereIsShip;
-      StarSystem destination = CommonData.galaxy.stream().filter(starSystem -> starSystem.ID.equals(destinationID)).findFirst()
-              .orElseThrow(() -> new OrderError("Ship " + destinationID + " not found!"));
+      StarSystem destination = CommonData.galaxy.starSystems.stream().filter(starSystem -> starSystem.ID.equals(destinationID)).findFirst()
+              .orElseThrow(() -> new OrderError("System " + destinationID + " not found!"));
 
       if (current.getConnections().contains(destination)) {
          if (CommonData.fortresses.stream()
