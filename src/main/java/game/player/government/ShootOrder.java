@@ -30,6 +30,7 @@ public class ShootOrder extends Order {
       if (attacker.whereIsShip.ID.equals(defender.whereIsShip.ID)) {
          int attack = attacker.shoot();
          int defend = defender.defend();
+
          if (attacker.shipType.getSize() <= defender.shipType.getSize()) {
             if (attack > defend) {
                CommonData.ships.remove(defender);

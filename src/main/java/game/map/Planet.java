@@ -6,4 +6,12 @@ public class Planet extends MapElement{
    public Planet(String owner) {
       super(owner);
    }
+
+   public void upgrade(){
+      level++;
+   }
+
+   public void downgrade(){
+      level--;
+   }
 }
