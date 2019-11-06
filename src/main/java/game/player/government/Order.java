@@ -1,12 +1,15 @@
 package game.player.government;
 
-import game.map.Ship;
+import game.player.Player;
 
-public class Order {
+public abstract class Order {
+   Player owner;
    OrderType type;
 
-   Ship receivingShip;
+   public Order(Player owner, OrderType type) {
+      this.owner = owner;
+      this.type = type;
+   }
 
-   System targetSystem;
-   Ship targetShip;
+   public abstract void runOrder();
 }

@@ -1,7 +1,7 @@
 package game.player.diplomacy;
 
-import game.map.Ship;
-import game.map.System;
+import game.ship.Ship;
+import game.map.StarSystem;
 
 import java.util.Set;
 
@@ -9,7 +9,7 @@ public class Offer {
    OfferType type;
 
    DiplomaticStatus offeredDiplomaticStatus;
-   Set<System> offeredSystems;
+   Set<StarSystem> offeredStarSystems;
    Set<Ship> offeredShips;
    Integer offeredMoney;
 }

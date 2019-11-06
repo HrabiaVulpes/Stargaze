@@ -3,15 +3,13 @@ package game.map;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GalaxyGenerator {
-    private static int numberBetween(int a, int b) {
-        return (int) (Math.random() * (b - a) + a);
-    }
+import static game.Utils.numberBetween;
 
-    public static Set<System> generateGalaxy(int width, int height) {
-        Set<System> result = new HashSet<>();
+public class GalaxyGenerator {
+    public static Set<StarSystem> generateGalaxy(int width, int height) {
+        Set<StarSystem> result = new HashSet<>();
         for (int i = 0; i < 1000; i++) {
-            result.add(new System(numberBetween(0, width), numberBetween(0, height)));
+            result.add(new StarSystem(numberBetween(0, width), numberBetween(0, height)));
         }
         return result;
     }

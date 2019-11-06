@@ -2,15 +2,14 @@ package game.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 import java.util.Set;
-import game.map.System;
+import game.map.StarSystem;
 
 public class MapPanel extends JPanel {
-    Set<System> galaxy;
+    Set<StarSystem> galaxy;
     int pointSize = 10;
 
-    public MapPanel(Set<System> galaxy) {
+    public MapPanel(Set<StarSystem> galaxy) {
         this.galaxy = galaxy;
     }
 
@@ -18,12 +17,12 @@ public class MapPanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.blue);
 
-        for (System system : galaxy) {
-            int x = system.getX();
-            int y = system.getY();
+        for (StarSystem starSystem : galaxy) {
+            int x = starSystem.getX();
+            int y = starSystem.getY();
             g2d.fillOval(x-pointSize, y-pointSize, pointSize, pointSize);
 
-            for (System connection : system.getConnections()){
+            for (StarSystem connection : starSystem.getConnections()){
                 int x1 = connection.getX();
                 int y1 = connection.getY();
                 g2d.drawLine(x, y, x1, y1);

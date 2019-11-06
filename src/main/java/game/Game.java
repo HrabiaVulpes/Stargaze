@@ -38,9 +38,9 @@ public class Game {
 
    private void economics() {
       for (Player player:players){
-         player.money += player.systems.size();
-         player.money -= player.ships.size();
-         player.money -= player.fortresses.stream().mapToInt(fortress -> fortress.level).sum();
+         player.money += galaxy.stream().filter(system -> system.getOwner().equals(player.name)).count();
+         player.money -= ships.stream().filter(ship -> ship.owner.equals(player.name)).count();
+         player.money -= fortresses.stream().filter(fortress -> fortress.owner.equals(player.name)).mapToInt(fortress -> fortress.level).sum();
       }
    }
 
