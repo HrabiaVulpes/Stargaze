@@ -4,11 +4,11 @@ import game.CommonData;
 import game.player.Player;
 import game.ship.Ship;
 
-public class ShootOrder extends Order {
+public class OrderShoot extends Order {
    private String attackerID;
    private String defenderID;
 
-   public ShootOrder(Player owner, String attackerID, String defenderID) {
+   public OrderShoot(Player owner, String attackerID, String defenderID) {
       super(owner, OrderType.SHIP_SHOOT);
       this.attackerID = attackerID;
       this.defenderID = defenderID;
