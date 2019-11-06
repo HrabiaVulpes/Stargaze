@@ -7,7 +7,7 @@ import game.player.Player;
 import java.util.NoSuchElementException;
 
 public class OrderPlanetDowngrade extends Order {
-   String planetID;
+   private String planetID;
 
    public OrderPlanetDowngrade(Player owner, String planetID) {
       super(owner, OrderType.PLANET_DOWNGRADE);

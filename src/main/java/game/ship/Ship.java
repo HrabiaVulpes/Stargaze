@@ -3,6 +3,7 @@ package game.ship;
 import game.CommonData;
 import game.Utils;
 import game.map.MapElement;
+import game.map.Planet;
 import game.map.StarSystem;
 import game.player.Player;
 
@@ -14,12 +15,11 @@ public class Ship extends MapElement {
    public Integer offences = 0;
    public StarSystem whereIsShip;
 
-   public Ship(String owner, ShipTypes shipType, StarSystem whereIsShip) {
-      super(owner);
+   public Ship(Player owner, ShipTypes shipType, StarSystem whereIsShip) {
+      super(owner.name);
       this.shipType = shipType;
-      Player ownerPlayer = CommonData.players.stream().filter(player -> player.name.equals(owner)).findFirst().orElseThrow(NoSuchElementException::new);
-      defences = ownerPlayer.defencesTech;
-      offences = ownerPlayer.offencesTech;
+      defences = owner.defencesTech;
+      offences = owner.offencesTech;
       this.whereIsShip = whereIsShip;
    }
 
