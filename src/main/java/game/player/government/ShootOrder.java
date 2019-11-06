@@ -4,8 +4,6 @@ import game.CommonData;
 import game.player.Player;
 import game.ship.Ship;
 
-import java.util.NoSuchElementException;
-
 public class ShootOrder extends Order {
    private String attackerID;
    private String defenderID;
@@ -17,15 +15,15 @@ public class ShootOrder extends Order {
    }
 
    @Override
-   public void runOrder() {
+   public void runOrder() throws OrderError {
       Ship attacker = CommonData.ships.stream()
               .filter(ship -> ship.owner.equals(owner.name))
               .filter(ship -> ship.ID.equals(attackerID))
-              .findFirst().orElseThrow(NoSuchElementException::new);
+              .findFirst().orElseThrow(() -> new OrderError("Ship " + attackerID + " not found!"));
 
       Ship defender = CommonData.ships.stream()
               .filter(ship -> ship.ID.equals(defenderID))
-              .findFirst().orElseThrow(NoSuchElementException::new);
+              .findFirst().orElseThrow(() -> new OrderError("Ship " + defenderID + " not found!"));
 
       if (attacker.whereIsShip.ID.equals(defender.whereIsShip.ID)) {
          int attack = attacker.shoot();
@@ -40,6 +38,8 @@ public class ShootOrder extends Order {
                CommonData.ships.remove(defender);
             }
          }
+      } else {
+         throw new OrderError("Ships " + attackerID + " and " + defenderID + " are not in the same system!");
       }
    }
 }

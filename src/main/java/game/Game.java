@@ -1,7 +1,7 @@
 package game;
 
 import game.player.Player;
-import game.player.government.Order;
+import game.player.government.OrderError;
 import game.player.government.OrderType;
 
 import java.util.HashSet;
@@ -56,13 +56,13 @@ public class Game {
    }
 
    private void movement() {
-      orders.stream().filter(order -> order.type == OrderType.SHIP_MOVE).forEach(Order::runOrder);
+      doOrdersByType(OrderType.SHIP_MOVE);
       orders = orders.stream().filter(order -> order.type != OrderType.SHIP_MOVE).collect(Collectors.toSet());
    }
 
    private void warfare() {
-      orders.stream().filter(order -> order.type == OrderType.SHIP_TAKE_SYSTEM).forEach(Order::runOrder);
-      orders.stream().filter(order -> order.type == OrderType.SHIP_SHOOT).forEach(Order::runOrder);
+      doOrdersByType(OrderType.SHIP_TAKE_SYSTEM);
+      doOrdersByType(OrderType.SHIP_SHOOT);
 
       orders = orders.stream()
               .filter(order -> order.type != OrderType.SHIP_SHOOT)
@@ -71,11 +71,11 @@ public class Game {
    }
 
    private void development() {
-      orders.stream().filter(order -> order.type == OrderType.PLANET_UPGRADE).forEach(Order::runOrder);
-      orders.stream().filter(order -> order.type == OrderType.PLANET_DOWNGRADE).forEach(Order::runOrder);
-      orders.stream().filter(order -> order.type == OrderType.PLANET_BUILD_SHIP).forEach(Order::runOrder);
-      orders.stream().filter(order -> order.type == OrderType.FORTRESS_UPGRADE).forEach(Order::runOrder);
-      orders.stream().filter(order -> order.type == OrderType.FORTRESS_DOWNGRADE).forEach(Order::runOrder);
+      doOrdersByType(OrderType.PLANET_UPGRADE);
+      doOrdersByType(OrderType.PLANET_DOWNGRADE);
+      doOrdersByType(OrderType.PLANET_BUILD_SHIP);
+      doOrdersByType(OrderType.FORTRESS_UPGRADE);
+      doOrdersByType(OrderType.FORTRESS_DOWNGRADE);
 
       orders = orders.stream()
               .filter(order -> order.type != OrderType.PLANET_UPGRADE)
@@ -84,5 +84,18 @@ public class Game {
               .filter(order -> order.type != OrderType.FORTRESS_UPGRADE)
               .filter(order -> order.type != OrderType.FORTRESS_DOWNGRADE)
               .collect(Collectors.toSet());
+   }
+
+   private void doOrdersByType(OrderType type) {
+      orders.stream().filter(order -> order.type == type)
+              .forEach(
+                      order -> {
+                         try {
+                            order.runOrder();
+                         } catch (OrderError orderError) {
+                            System.out.println(orderError.getMessage());
+                         }
+                      }
+              );
    }
 }

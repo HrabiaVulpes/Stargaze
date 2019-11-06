@@ -6,8 +6,6 @@ import game.player.Player;
 import game.ship.Ship;
 import game.ship.ShipTypes;
 
-import java.util.NoSuchElementException;
-
 public class OrderPlanetBuildShip extends Order {
    private String planetID;
    private ShipTypes shipType;
@@ -19,11 +17,11 @@ public class OrderPlanetBuildShip extends Order {
    }
 
    @Override
-   public void runOrder() {
+   public void runOrder() throws OrderError {
       Planet orderedPlanet = CommonData.planets.stream()
               .filter(planet -> planet.owner.equals(owner.name))
               .filter(planet -> planet.ID.equals(planetID))
-              .findFirst().orElseThrow(NoSuchElementException::new);
+              .findFirst().orElseThrow(() -> new OrderError("Planet " + planetID + " not found!"));
 
       if (orderedPlanet.level >= shipType.getSize() && owner.money >= shipType.getSize() && !orderedPlanet.shipyardUsed) {
          orderedPlanet.shipyardUsed = true;
@@ -31,6 +29,8 @@ public class OrderPlanetBuildShip extends Order {
 
          Ship newShip = new Ship(owner, shipType, orderedPlanet.whereIsPlanet);
          CommonData.ships.add(newShip);
+      } else {
+         throw new OrderError("Can't build ship!");
       }
    }
 }

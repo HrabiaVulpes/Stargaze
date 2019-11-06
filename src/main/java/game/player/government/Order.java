@@ -11,5 +11,5 @@ public abstract class Order {
       this.type = type;
    }
 
-   public abstract void runOrder();
+   public abstract void runOrder() throws OrderError;
 }

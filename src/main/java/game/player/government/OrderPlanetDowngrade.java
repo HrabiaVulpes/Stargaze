@@ -4,8 +4,6 @@ import game.CommonData;
 import game.map.Planet;
 import game.player.Player;
 
-import java.util.NoSuchElementException;
-
 public class OrderPlanetDowngrade extends Order {
    private String planetID;
 
@@ -15,14 +13,16 @@ public class OrderPlanetDowngrade extends Order {
    }
 
    @Override
-   public void runOrder() {
+   public void runOrder() throws OrderError {
       Planet orderedPlanet = CommonData.planets.stream()
               .filter(planet -> planet.owner.equals(owner.name))
               .filter(planet -> planet.ID.equals(planetID))
-              .findFirst().orElseThrow(NoSuchElementException::new);
+              .findFirst().orElseThrow(() -> new OrderError("Planet " + planetID + " not found!"));
 
       if (orderedPlanet.level > 1) {
          orderedPlanet.downgrade();
+      } else {
+         throw new OrderError("Planet " + planetID + " already lowest level!");
       }
    }
 }

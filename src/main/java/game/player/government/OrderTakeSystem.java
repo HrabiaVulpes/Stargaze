@@ -6,7 +6,6 @@ import game.map.StarSystem;
 import game.player.Player;
 import game.ship.Ship;
 
-import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,11 +18,11 @@ public class OrderTakeSystem extends Order {
    }
 
    @Override
-   public void runOrder() {
+   public void runOrder() throws OrderError {
       Ship orderedShip = CommonData.ships.stream()
               .filter(ship -> ship.owner.equals(owner.name))
               .filter(ship -> ship.ID.equals(shipID))
-              .findFirst().orElseThrow(NoSuchElementException::new);
+              .findFirst().orElseThrow(() -> new OrderError("Ship " + shipID + " not found!"));
 
       StarSystem system = orderedShip.whereIsShip;
       Fortress systemFortress = CommonData.fortresses.stream()
@@ -37,6 +36,8 @@ public class OrderTakeSystem extends Order {
 
       if (systemFortress.fortifiedLevel <= 0 && foreignShipsPresent.size() == 0) {
          system.setOwner(orderedShip.owner);
+      } else {
+         throw new OrderError("Ship " + shipID + " cannot take system " + system.ID);
       }
    }
 }

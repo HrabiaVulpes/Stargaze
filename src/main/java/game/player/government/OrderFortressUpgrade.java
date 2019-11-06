@@ -4,8 +4,6 @@ import game.CommonData;
 import game.map.Fortress;
 import game.player.Player;
 
-import java.util.NoSuchElementException;
-
 public class OrderFortressUpgrade extends Order {
    private String fortressID;
 
@@ -15,15 +13,17 @@ public class OrderFortressUpgrade extends Order {
    }
 
    @Override
-   public void runOrder() {
+   public void runOrder() throws OrderError {
       Fortress orderedfortress = CommonData.fortresses.stream()
               .filter(fortress -> fortress.owner.equals(owner.name))
               .filter(fortress -> fortress.ID.equals(fortressID))
-              .findFirst().orElseThrow(NoSuchElementException::new);
+              .findFirst().orElseThrow(() -> new OrderError("Fortress " + fortressID + " not found!"));
 
-      if (owner.money >= orderedfortress.level){
+      if (owner.money >= orderedfortress.level) {
          owner.money -= orderedfortress.level;
          orderedfortress.upgrade();
+      } else {
+         throw new OrderError("Insufficient funds to upgrade fortress " + fortressID);
       }
    }
 }

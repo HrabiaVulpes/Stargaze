@@ -4,8 +4,6 @@ import game.CommonData;
 import game.map.Fortress;
 import game.player.Player;
 
-import java.util.NoSuchElementException;
-
 public class OrderFortressDowngrade extends Order {
    private String fortressID;
 
@@ -15,14 +13,16 @@ public class OrderFortressDowngrade extends Order {
    }
 
    @Override
-   public void runOrder() {
+   public void runOrder() throws OrderError {
       Fortress orderedFortress = CommonData.fortresses.stream()
               .filter(fortress -> fortress.owner.equals(owner.name))
               .filter(fortress -> fortress.ID.equals(fortressID))
-              .findFirst().orElseThrow(NoSuchElementException::new);
+              .findFirst().orElseThrow(() -> new OrderError("Fortress " + fortressID + " not found!"));
 
-      if (orderedFortress.level > 1) {
+      if (orderedFortress.level > 0) {
          orderedFortress.downgrade();
+      } else {
+         throw new OrderError("Fortress " + fortressID + " is already at level 0");
       }
    }
 }
