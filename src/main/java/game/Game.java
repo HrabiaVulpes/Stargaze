@@ -1,5 +1,6 @@
 package game;
 
+import game.map.Fortress;
 import game.player.Player;
 import game.player.government.OrderError;
 import game.player.government.OrderType;
@@ -27,6 +28,7 @@ public class Game {
          } catch (Exception e) {
             e.printStackTrace();
          }
+         cleanUp();
       }
    }
 
@@ -68,6 +70,8 @@ public class Game {
               .filter(order -> order.type != OrderType.SHIP_SHOOT)
               .filter(order -> order.type != OrderType.SHIP_TAKE_SYSTEM)
               .collect(Collectors.toSet());
+
+      fortresses.forEach(Fortress::siege);
    }
 
    private void development() {
@@ -84,6 +88,13 @@ public class Game {
               .filter(order -> order.type != OrderType.FORTRESS_UPGRADE)
               .filter(order -> order.type != OrderType.FORTRESS_DOWNGRADE)
               .collect(Collectors.toSet());
+   }
+
+   private void cleanUp() {
+      orders.clear();
+      fortresses.forEach(fortress -> fortress.orderedAlready = false);
+      planets.forEach(planet -> planet.orderedAlready = false);
+      ships.forEach(ship -> ship.orderedAlready = false);
    }
 
    private void doOrdersByType(OrderType type) {
