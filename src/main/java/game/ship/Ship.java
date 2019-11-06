@@ -11,6 +11,7 @@ public class Ship extends MapElement {
    public Integer offences = 0;
    public Integer hullPoints = 1;
    public StarSystem whereIsShip;
+   public StarSystem whereWasShip;
 
    public Ship(Player owner, ShipTypes shipType, StarSystem whereIsShip) {
       super(owner.name);
@@ -18,6 +19,7 @@ public class Ship extends MapElement {
       defences = owner.defencesTech;
       offences = owner.offencesTech;
       this.whereIsShip = whereIsShip;
+      this.whereWasShip = whereIsShip;
    }
 
    public Integer shoot() {
@@ -29,6 +31,7 @@ public class Ship extends MapElement {
    }
 
    public void move(StarSystem destination) {
+      whereWasShip = whereIsShip;
       whereIsShip = destination;
    }
 }

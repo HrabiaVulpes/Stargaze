@@ -27,8 +27,20 @@ public class OrderMove extends Order {
       StarSystem current = orderedShip.whereIsShip;
       StarSystem destination = CommonData.galaxy.stream().filter(starSystem -> starSystem.ID.equals(destinationID)).findFirst()
               .orElseThrow(() -> new OrderError("Ship " + destinationID + " not found!"));
+
       if (current.getConnections().contains(destination)) {
-         orderedShip.move(destination);
+         if (CommonData.fortresses.stream()
+                 .filter(fortress -> fortress.whereIsFortress == current)
+                 .filter(fortress -> !fortress.owner.equals(orderedShip.owner))
+                 .noneMatch(fortress -> fortress.fortifiedLevel > 0)) {
+            orderedShip.move(destination);
+         } else {
+            if (destination == orderedShip.whereWasShip) {
+               orderedShip.move(destination);
+            } else {
+               throw new OrderError("Ship " + shipID + " cannot bypass local fortress!");
+            }
+         }
       } else {
          throw new OrderError("Systems " + current.ID + " and " + destinationID + " are not connected!");
       }
