@@ -19,7 +19,9 @@ public class OrderPlanetDowngrade extends Order {
               .filter(planet -> planet.ID.equals(planetID))
               .findFirst().orElseThrow(() -> new OrderError("Planet " + planetID + " not found!"));
 
-      if (orderedPlanet.orderedAlready) throw new OrderError("Planet " + planetID + " already moved!");
+      if (orderedPlanet.orderedAlready) {
+         throw new OrderError("Planet " + planetID + " already moved!");
+      }
 
       if (orderedPlanet.level > 1) {
          orderedPlanet.downgrade();

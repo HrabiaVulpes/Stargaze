@@ -1,7 +1,7 @@
 package game.player.diplomacy;
 
-import game.ship.Ship;
 import game.map.StarSystem;
+import game.ship.Ship;
 
 import java.util.Set;
 

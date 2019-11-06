@@ -1,6 +1,6 @@
 package game.map;
 
-public class Planet extends MapElement{
+public class Planet extends MapElement {
    public Integer level = 1;
    public StarSystem whereIsPlanet;
    public boolean shipyardUsed = false;
@@ -10,11 +10,11 @@ public class Planet extends MapElement{
       this.whereIsPlanet = system;
    }
 
-   public void upgrade(){
+   public void upgrade() {
       level++;
    }
 
-   public void downgrade(){
+   public void downgrade() {
       level--;
    }
 }

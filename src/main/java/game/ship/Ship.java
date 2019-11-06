@@ -1,13 +1,9 @@
 package game.ship;
 
-import game.CommonData;
 import game.Utils;
 import game.map.MapElement;
-import game.map.Planet;
 import game.map.StarSystem;
 import game.player.Player;
-
-import java.util.NoSuchElementException;
 
 public class Ship extends MapElement {
    public ShipTypes shipType;

@@ -2,11 +2,11 @@ package game;
 
 import game.map.Fortress;
 import game.map.Planet;
-import game.ship.Ship;
 import game.map.StarSystem;
 import game.player.Player;
 import game.player.diplomacy.Message;
 import game.player.government.Order;
+import game.ship.Ship;
 
 import java.util.Set;
 
