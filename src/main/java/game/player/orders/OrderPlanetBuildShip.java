@@ -18,7 +18,7 @@ public class OrderPlanetBuildShip extends Order {
 
    @Override
    public void runOrder() throws OrderError {
-      Planet orderedPlanet = CommonData.planets.stream()
+      Planet orderedPlanet = CommonData.planets.stream()                   // TODO: sprawdzić czy optymalne
               .filter(planet -> planet.owner.equals(owner.name))
               .filter(planet -> planet.ID.equals(planetID))
               .findFirst().orElseThrow(() -> new OrderError("Planet " + planetID + " not found!"));
@@ -28,8 +28,7 @@ public class OrderPlanetBuildShip extends Order {
          throw new OrderError("Planet " + planetID + " already moved!");
       }
 
-      if (orderedPlanet.level >= shipType.getSize() && owner.money >= shipType.getSize() && !orderedPlanet.shipyardUsed) {
-         orderedPlanet.shipyardUsed = true;
+      if (orderedPlanet.level >= shipType.getSize() && owner.money >= shipType.getSize()) {
          owner.money -= shipType.getSize();
 
          Ship newShip = new Ship(owner, shipType, orderedPlanet.whereIsPlanet);
