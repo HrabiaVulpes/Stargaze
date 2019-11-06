@@ -1,5 +1,6 @@
 package game.player.orders;
 
+import game.CommonData;
 import game.player.Player;
 
 public abstract class Order {
@@ -12,4 +13,8 @@ public abstract class Order {
    }
 
    public abstract void runOrder() throws OrderError;
+
+   public void reAddOrder(){
+      CommonData.futureOrders.add(this);
+   }
 }

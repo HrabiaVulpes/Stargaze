@@ -21,6 +21,7 @@ public class OrderMove extends Order {
               .orElseThrow(() -> new OrderError("Ship " + shipID + " not found!"));
 
       if (orderedShip.orderedAlready) {
+         reAddOrder();
          throw new OrderError("Ship " + shipID + " already moved!");
       }
 

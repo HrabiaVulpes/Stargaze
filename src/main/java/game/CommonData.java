@@ -8,6 +8,7 @@ import game.player.diplomacy.Message;
 import game.player.orders.Order;
 import game.ship.Ship;
 
+import java.util.List;
 import java.util.Set;
 
 public class CommonData {
@@ -16,7 +17,8 @@ public class CommonData {
    public static Set<Player> players;
    public static Set<StarSystem> galaxy;
    public static Set<Message> messages;
-   public static Set<Order> orders;
+   public static List<Order> orders;
+   public static List<Order> futureOrders;
    public static Set<Planet> planets;
    public static Set<Fortress> fortresses;
    public static Set<Ship> ships;

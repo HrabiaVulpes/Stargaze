@@ -22,6 +22,7 @@ public class OrderShoot extends Order {
               .findFirst().orElseThrow(() -> new OrderError("Ship " + attackerID + " not found!"));
 
       if (attacker.orderedAlready) {
+         reAddOrder();
          throw new OrderError("Ship " + attackerID + " already moved!");
       }
 

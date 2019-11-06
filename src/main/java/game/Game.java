@@ -5,6 +5,7 @@ import game.player.Player;
 import game.player.orders.OrderError;
 import game.player.orders.OrderType;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
@@ -59,7 +60,7 @@ public class Game {
 
    private void movement() {
       doOrdersByType(OrderType.SHIP_MOVE);
-      orders = orders.stream().filter(order -> order.type != OrderType.SHIP_MOVE).collect(Collectors.toSet());
+      orders = orders.stream().filter(order -> order.type != OrderType.SHIP_MOVE).collect(Collectors.toList());
    }
 
    private void warfare() {
@@ -69,7 +70,7 @@ public class Game {
       orders = orders.stream()
               .filter(order -> order.type != OrderType.SHIP_SHOOT)
               .filter(order -> order.type != OrderType.SHIP_TAKE_SYSTEM)
-              .collect(Collectors.toSet());
+              .collect(Collectors.toList());
 
       ships = ships.stream().filter(ship -> ship.hullPoints > 0).collect(Collectors.toSet());
       fortresses.forEach(Fortress::siege);
@@ -88,14 +89,15 @@ public class Game {
               .filter(order -> order.type != OrderType.PLANET_BUILD_SHIP)
               .filter(order -> order.type != OrderType.FORTRESS_UPGRADE)
               .filter(order -> order.type != OrderType.FORTRESS_DOWNGRADE)
-              .collect(Collectors.toSet());
+              .collect(Collectors.toList());
    }
 
    private void cleanUp() {
-      orders.clear();
       fortresses.forEach(fortress -> fortress.orderedAlready = false);
       planets.forEach(planet -> planet.orderedAlready = false);
       ships.forEach(ship -> ship.orderedAlready = false);
+      orders = new ArrayList<>(futureOrders);
+      futureOrders.clear();
    }
 
    private void doOrdersByType(OrderType type) {

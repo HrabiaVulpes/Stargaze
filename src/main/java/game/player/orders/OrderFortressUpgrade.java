@@ -20,6 +20,7 @@ public class OrderFortressUpgrade extends Order {
               .findFirst().orElseThrow(() -> new OrderError("Fortress " + fortressID + " not found!"));
 
       if (orderedfortress.orderedAlready) {
+         reAddOrder();
          throw new OrderError("Fortress " + fortressID + " already moved!");
       }
 

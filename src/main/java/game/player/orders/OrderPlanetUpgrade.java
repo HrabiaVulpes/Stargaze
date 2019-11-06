@@ -20,6 +20,7 @@ public class OrderPlanetUpgrade extends Order {
               .findFirst().orElseThrow(() -> new OrderError("Planet " + planetID + " not found!"));
 
       if (orderedPlanet.orderedAlready) {
+         reAddOrder();
          throw new OrderError("Planet " + planetID + " already moved!");
       }
 
