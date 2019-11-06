@@ -9,6 +9,7 @@ public class Ship extends MapElement {
    public ShipTypes shipType;
    public Integer defences = 0;
    public Integer offences = 0;
+   public Integer hullPoints = 1;
    public StarSystem whereIsShip;
 
    public Ship(Player owner, ShipTypes shipType, StarSystem whereIsShip) {

@@ -35,11 +35,11 @@ public class OrderShoot extends Order {
 
          if (attacker.shipType.getSize() <= defender.shipType.getSize()) {
             if (attack > defend) {
-               CommonData.ships.remove(defender);
+               defender.hullPoints--;
             }
          } else {
             if (attack < defend) {
-               CommonData.ships.remove(defender);
+               defender.hullPoints--;
             }
          }
       } else {

@@ -71,6 +71,7 @@ public class Game {
               .filter(order -> order.type != OrderType.SHIP_TAKE_SYSTEM)
               .collect(Collectors.toSet());
 
+      ships = ships.stream().filter(ship -> ship.hullPoints > 0).collect(Collectors.toSet());
       fortresses.forEach(Fortress::siege);
    }
 
