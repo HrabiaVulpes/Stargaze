@@ -1,14 +1,14 @@
-package game.player.government;
+package game.player.orders;
 
 import game.CommonData;
 import game.map.Planet;
 import game.player.Player;
 
-public class OrderPlanetDowngrade extends Order {
+public class OrderPlanetUpgrade extends Order {
    private String planetID;
 
-   public OrderPlanetDowngrade(Player owner, String planetID) {
-      super(owner, OrderType.PLANET_DOWNGRADE);
+   public OrderPlanetUpgrade(Player owner, String planetID) {
+      super(owner, OrderType.PLANET_UPGRADE);
       this.planetID = planetID;
    }
 
@@ -23,10 +23,11 @@ public class OrderPlanetDowngrade extends Order {
          throw new OrderError("Planet " + planetID + " already moved!");
       }
 
-      if (orderedPlanet.level > 1) {
-         orderedPlanet.downgrade();
+      if (owner.money >= orderedPlanet.level) {
+         owner.money -= orderedPlanet.level;
+         orderedPlanet.upgrade();
       } else {
-         throw new OrderError("Planet " + planetID + " already lowest level!");
+         throw new OrderError("Insufficient funds to upgrade planet " + planetID);
       }
    }
 }

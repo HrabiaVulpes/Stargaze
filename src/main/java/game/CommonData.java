@@ -5,7 +5,7 @@ import game.map.Planet;
 import game.map.StarSystem;
 import game.player.Player;
 import game.player.diplomacy.Message;
-import game.player.government.Order;
+import game.player.orders.Order;
 import game.ship.Ship;
 
 import java.util.Set;

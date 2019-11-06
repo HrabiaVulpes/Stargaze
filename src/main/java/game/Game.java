@@ -2,8 +2,8 @@ package game;
 
 import game.map.Fortress;
 import game.player.Player;
-import game.player.government.OrderError;
-import game.player.government.OrderType;
+import game.player.orders.OrderError;
+import game.player.orders.OrderType;
 
 import java.util.HashSet;
 import java.util.stream.Collectors;

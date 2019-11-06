@@ -1,4 +1,4 @@
-package game.player.government;
+package game.player.orders;
 
 import game.player.Player;
 
