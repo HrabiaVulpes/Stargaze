@@ -4,7 +4,7 @@ import game.player.Player;
 
 public abstract class Order {
    Player owner;
-   OrderType type;
+   public OrderType type;
 
    public Order(Player owner, OrderType type) {
       this.owner = owner;
