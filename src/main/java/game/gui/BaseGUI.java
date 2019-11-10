@@ -21,10 +21,10 @@ public class BaseGUI extends JFrame {
    }
 
    private void initUI() {
-      JPanel drawPanel = new MapPanel(GalaxyGenerator.generateGalaxy(width, 1000));
+      JPanel drawPanel = new MapPanel(GalaxyGenerator.generateGalaxy(width, height));
       add(drawPanel);
 
-      setSize(width, 1000);
+      setSize(width, height);
       setTitle("Stars");
       setLocationRelativeTo(null);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
