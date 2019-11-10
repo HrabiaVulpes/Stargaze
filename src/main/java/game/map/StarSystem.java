@@ -15,7 +15,7 @@ public class StarSystem {
       this.x = x;
       this.y = y;
       ID = UUID.randomUUID().toString();
-      connections = Collections.emptySet();
+      connections = new HashSet<>();
    }
 
    public Set<StarSystem> getConnections() {
