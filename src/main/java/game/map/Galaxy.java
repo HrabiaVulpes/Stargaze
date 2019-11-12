@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Galaxy {
    public Set<StarSystem> starSystems;
+   public Set<Connection> connetionsNet;
 
    public Set<StarSystem> getSystemsByOwner(Player player) {
       return starSystems.stream().filter(system -> system.getOwner().equals(player.name)).collect(Collectors.toSet());
