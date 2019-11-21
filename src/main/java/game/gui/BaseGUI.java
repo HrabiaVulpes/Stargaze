@@ -1,32 +1,46 @@
 package game.gui;
 
-import game.map.GalaxyGenerator;
+import game.CommonData;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 
-public class BaseGUI extends JFrame {
-   static final int width = 1000;
-   static final int height = 1000;
+import static game.CommonData.mapHeight;
+import static game.CommonData.mapWidth;
 
-   public BaseGUI() {
-      initUI();
-   }
+public class BaseGUI extends JFrame implements Runnable{
+    public BaseGUI(){
+        initUI();
+    }
 
-   public static void main(String[] args) {
-      EventQueue.invokeLater(() -> {
-         JFrame ex = new BaseGUI();
-         ex.setVisible(true);
-      });
-   }
+    public void run() {
+        EventQueue.invokeLater(() -> {
+            JFrame ex = new BaseGUI();
+            ex.setVisible(true);
+        });
+    }
 
-   private void initUI() {
-      JPanel drawPanel = new MapPanel(GalaxyGenerator.generateGalaxy(width, height));
-      add(drawPanel);
+    private void initUI() {
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-      setSize(width, height);
-      setTitle("Stars");
-      setLocationRelativeTo(null);
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   }
+        JPanel mapPanel = new MapPanel(CommonData.galaxy.starSystems);
+        JPanel playerDataPanel = new PlayerDataPanel(CommonData.players.get(0));
+        mainPanel.add(mapPanel);
+        mainPanel.add(playerDataPanel);
+
+        add(mainPanel);
+        setSize(mapWidth, mapHeight);
+        setTitle("Stars");
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(WindowEvent winEvt) {
+                CommonData.continueGame = false;
+                System.exit(0);
+            }
+        });
+    }
 }

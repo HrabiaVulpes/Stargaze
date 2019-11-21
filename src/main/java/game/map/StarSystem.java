@@ -7,7 +7,7 @@ public class StarSystem {
    public final String ID;
    public Integer distance = -1;
    private Set<StarSystem> connections;
-   private String owner;
+   private String owner = "";
    private int x;
    private int y;
 

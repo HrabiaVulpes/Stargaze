@@ -9,6 +9,10 @@ import java.util.stream.Collectors;
 public class Galaxy {
    public Set<StarSystem> starSystems;
 
+   public Galaxy(Set<StarSystem> starSystems) {
+      this.starSystems = starSystems;
+   }
+
    public Set<StarSystem> getSystemsByOwner(Player player) {
       return starSystems.stream().filter(system -> system.getOwner().equals(player.name)).collect(Collectors.toSet());
    }
