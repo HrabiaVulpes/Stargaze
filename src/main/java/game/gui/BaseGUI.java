@@ -23,15 +23,16 @@ public class BaseGUI extends JFrame implements Runnable{
 
     private void initUI() {
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setLayout(new BorderLayout());
 
         JPanel mapPanel = new MapPanel(CommonData.galaxy.starSystems);
         JPanel playerDataPanel = new PlayerDataPanel(CommonData.players.get(0));
-        mainPanel.add(mapPanel);
-        mainPanel.add(playerDataPanel);
+
+        mainPanel.add(mapPanel, BorderLayout.CENTER);
+        mainPanel.add(playerDataPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
-        setSize(mapWidth, mapHeight);
+        setSize(mapWidth, mapHeight+50);
         setTitle("Stars");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

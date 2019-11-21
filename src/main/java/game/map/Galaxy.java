@@ -7,26 +7,37 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Galaxy {
-   public Set<StarSystem> starSystems;
+    public Set<StarSystem> starSystems;
 
-   public Galaxy(Set<StarSystem> starSystems) {
-      this.starSystems = starSystems;
-   }
+    public Galaxy(Set<StarSystem> starSystems) {
+        this.starSystems = starSystems;
+        optimize();
+    }
 
-   public Set<StarSystem> getSystemsByOwner(Player player) {
-      return starSystems.stream().filter(system -> system.getOwner().equals(player.name)).collect(Collectors.toSet());
-   }
+    private void optimize() {
+        int minX = starSystems.stream().mapToInt(StarSystem::getX).min().orElse(0);
+        int minY = starSystems.stream().mapToInt(StarSystem::getY).min().orElse(0);
 
-   public StarSystem getSystemByID(String ID) throws OrderError {
-      return starSystems.stream().filter(system -> system.ID.equals(ID)).findFirst().orElseThrow(() -> new OrderError("System " + ID + " not found!"));
-   }
+        starSystems.forEach(starSystem -> {
+            starSystem.setX(starSystem.getX() - minX + 15);
+            starSystem.setY(starSystem.getY() - minY + 15);
+        });
+    }
 
-   public StarSystem getSystemByOwnerAndID(Player player, String ID) throws OrderError {
-      return starSystems.stream()
-              .filter(system -> system.getOwner().equals(player.name))
-              .filter(system -> system.ID.equals(ID)).findFirst()
-              .orElseThrow(() -> new OrderError("System " + ID + " not found!"));
-   }
+    public Set<StarSystem> getSystemsByOwner(Player player) {
+        return starSystems.stream().filter(system -> system.getOwner().equals(player.name)).collect(Collectors.toSet());
+    }
+
+    public StarSystem getSystemByID(String ID) throws OrderError {
+        return starSystems.stream().filter(system -> system.ID.equals(ID)).findFirst().orElseThrow(() -> new OrderError("System " + ID + " not found!"));
+    }
+
+    public StarSystem getSystemByOwnerAndID(Player player, String ID) throws OrderError {
+        return starSystems.stream()
+                .filter(system -> system.getOwner().equals(player.name))
+                .filter(system -> system.ID.equals(ID)).findFirst()
+                .orElseThrow(() -> new OrderError("System " + ID + " not found!"));
+    }
 
 
 }

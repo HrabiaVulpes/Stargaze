@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class CommonData {
     public static final int mapWidth = 1000;
-    public static final int mapHeight = 1000;
+    public static final int mapHeight = 700;
 
     public static Boolean continueGame = true;
     public static Long gameSpeed = 10000L;                 // miliseconds per turn

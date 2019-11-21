@@ -1,5 +1,6 @@
 package game.gui;
 
+import game.CommonData;
 import game.map.StarSystem;
 
 import javax.swing.*;
@@ -11,7 +12,9 @@ public class MapPanel extends JPanel {
    int pointSize = 10;
 
    public MapPanel(Set<StarSystem> galaxy) {
+      setSize(CommonData.mapWidth, CommonData.mapHeight);
       this.galaxy = galaxy;
+      setSize(CommonData.mapWidth, CommonData.mapHeight);
    }
 
    private void doDrawing(Graphics g) {
