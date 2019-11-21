@@ -14,7 +14,7 @@ public class GalaxyGenerator {
         Set<StarSystem> result = new HashSet<>();
         StarSystem baseSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
         StarSystem childSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             while (!isStarSystemClose(baseSystem, childSystem, 90000))
                 childSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
             baseSystem.addConnection(childSystem);
