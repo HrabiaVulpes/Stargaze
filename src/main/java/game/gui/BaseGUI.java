@@ -14,6 +14,7 @@ public class BaseGUI extends JFrame implements Runnable{
         initUI();
     }
 
+    @Override
     public void run() {
         EventQueue.invokeLater(() -> {
             JFrame ex = new BaseGUI();
