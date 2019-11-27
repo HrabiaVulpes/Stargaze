@@ -1,16 +1,18 @@
 package game.gui;
 
 import game.CommonData;
+import game.ship.Ship;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 
-import static game.CommonData.mapHeight;
-import static game.CommonData.mapWidth;
+import static game.CommonData.*;
 
-public class BaseGUI extends JFrame implements Runnable{
-    public BaseGUI(){
+public class BaseGUI extends JFrame implements Runnable {
+    private static Object LOCK = new Object();
+
+    public BaseGUI() {
         initUI();
     }
 
@@ -28,12 +30,14 @@ public class BaseGUI extends JFrame implements Runnable{
 
         JPanel mapPanel = new MapPanel(CommonData.galaxy.starSystems);
         JPanel playerDataPanel = new PlayerDataPanel(CommonData.players.get(0));
+        JPanel controlPanel = new ControlPanel();
 
         mainPanel.add(mapPanel, BorderLayout.CENTER);
         mainPanel.add(playerDataPanel, BorderLayout.SOUTH);
+        mainPanel.add(controlPanel, BorderLayout.EAST);
 
         add(mainPanel);
-        setSize(mapWidth, mapHeight+50);
+        setSize(mapWidth, mapHeight + 50);
         setTitle("Stars");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

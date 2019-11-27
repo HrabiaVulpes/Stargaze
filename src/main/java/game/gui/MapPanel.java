@@ -2,6 +2,7 @@ package game.gui;
 
 import game.CommonData;
 import game.map.StarSystem;
+import game.ship.Ship;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,10 +10,9 @@ import java.util.Set;
 
 public class MapPanel extends JPanel {
    Set<StarSystem> galaxy;
-   int pointSize = 10;
+   private int pointSize = 10;
 
    public MapPanel(Set<StarSystem> galaxy) {
-      setSize(CommonData.mapWidth, CommonData.mapHeight);
       this.galaxy = galaxy;
       setSize(CommonData.mapWidth, CommonData.mapHeight);
    }
@@ -31,6 +31,14 @@ public class MapPanel extends JPanel {
             int y1 = connection.getY();
             g2d.drawLine(x, y, x1, y1);
          }
+      }
+
+      g2d.setColor(Color.red);
+      for (Ship ship : CommonData.ships){
+         int x = ship.whereIsShip.getX();
+         int y = ship.whereIsShip.getY();
+
+         g2d.fillRect(x, y-pointSize, pointSize, pointSize);
       }
    }
 

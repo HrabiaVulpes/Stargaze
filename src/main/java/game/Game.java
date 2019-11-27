@@ -4,12 +4,18 @@ import game.gui.BaseGUI;
 import game.map.Fortress;
 import game.map.Galaxy;
 import game.map.GalaxyGenerator;
+import game.map.StarSystem;
 import game.player.Player;
+import game.player.orders.Order;
 import game.player.orders.OrderError;
 import game.player.orders.OrderType;
+import game.ship.Ship;
+import game.ship.ShipTypes;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static game.CommonData.*;
 
@@ -34,16 +40,16 @@ public class Game {
             warfare();
             development();
 
-            baseGUI.repaint();
-
             synchronized (LOCK) {
                 try {
+                    System.out.println("Waiting");
                     long waitTime = gameSpeed + startTime - System.currentTimeMillis();
                     LOCK.wait(waitTime > 0 ? waitTime : 0);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
             cleanUp();
         }
     }
@@ -56,6 +62,9 @@ public class Game {
         players.add(new Player("Blue"));
         players.add(new Player("Black"));
         players.add(new Player("White"));
+
+        StarSystem system = galaxy.starSystems.stream().findAny().orElseThrow(NoSuchElementException::new);
+        ships.add(new Ship(players.get(0), ShipTypes.CORVETTE, system));
     }
 
     private void economics() {
@@ -77,6 +86,10 @@ public class Game {
     private void movement() {
         doOrdersByType(OrderType.SHIP_MOVE);
         orders = orders.stream().filter(order -> order.type != OrderType.SHIP_MOVE).collect(Collectors.toList());
+
+//        for (Ship ship : ships) {
+//            System.out.println("Ship: " + ship.whereIsShip.getX() + ", " + ship.whereIsShip.getY());
+//        }
     }
 
     private void warfare() {
@@ -88,7 +101,7 @@ public class Game {
                 .filter(order -> order.type != OrderType.SHIP_TAKE_SYSTEM)
                 .collect(Collectors.toList());
 
-        ships = ships.stream().filter(ship -> ship.hullPoints > 0).collect(Collectors.toSet());
+        ships = ships.stream().filter(ship -> ship.hullPoints > 0).collect(Collectors.toList());
         fortresses.forEach(Fortress::siege);
     }
 
@@ -112,20 +125,23 @@ public class Game {
         fortresses.forEach(fortress -> fortress.orderedAlready = false);
         planets.forEach(planet -> planet.orderedAlready = false);
         ships.forEach(ship -> ship.orderedAlready = false);
-        orders = new ArrayList<>(futureOrders);
+        orders.addAll(futureOrders);
         futureOrders.clear();
     }
 
     private void doOrdersByType(OrderType type) {
-        orders.stream().filter(order -> order.type == type)
-                .forEach(
-                        order -> {
-                            try {
-                                order.runOrder();
-                            } catch (OrderError orderError) {
-                                System.out.println(orderError.getMessage());
+        if (orders.stream().anyMatch(order -> order.type == type)) {
+            System.out.println("Doing " + orders.stream().filter(order -> order.type == type).count() + " " + type + " ");
+            orders.stream().filter(order -> order.type == type)
+                    .forEach(
+                            order -> {
+                                try {
+                                    order.runOrder();
+                                } catch (OrderError orderError) {
+                                    System.out.println(orderError.getMessage());
+                                }
                             }
-                        }
-                );
+                    );
+        }
     }
 }

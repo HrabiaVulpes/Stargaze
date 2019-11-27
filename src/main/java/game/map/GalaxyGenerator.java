@@ -24,8 +24,6 @@ public class GalaxyGenerator {
 
         result.add(childSystem);
         connectTwoNearestStarSystem(result);
-
-
         return result;
     }
 
