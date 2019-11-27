@@ -15,7 +15,7 @@ public class CommonData {
     public static final int mapHeight = 700;
 
     public static Boolean continueGame = true;
-    public static Long gameSpeed = 100L;                 // miliseconds per turn
+    public static Long gameSpeed = 1000L;                 // miliseconds per turn
     public static List<Player> players = new ArrayList<>();
     public static Set<Message> messages = new HashSet<>();
     public static Galaxy galaxy;
