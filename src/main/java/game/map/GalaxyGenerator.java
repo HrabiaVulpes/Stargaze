@@ -18,9 +18,9 @@ public class GalaxyGenerator {
         StarSystem baseSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
         StarSystem childSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
         for (int i = 0; i < MapSetting.numberOfStars; i++) {
-            while (!isStarSystemClose(baseSystem, childSystem, MapSetting.maxLengthOfConnection) ||
+            while (//!isStarSystemClose(baseSystem, childSystem, MapSetting.maxLengthOfConnection) ||
                    isConnectionCross(childSystem, baseSystem)){
-//                System.out.println(isConnectionCross(childSystem, baseSystem));
+                System.out.println("problem");
                 childSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
             }
             connections.add(new Connection(baseSystem, childSystem));
@@ -75,10 +75,7 @@ public class GalaxyGenerator {
     }
 
     static boolean isConnectionCross(StarSystem s1, StarSystem s2) {
-        int a = 0;
         for (Connection connection : connections) {
-            a++;
-            System.out.println(a);
             if(ConnectionCalculator.doIntersect(s1,s2,connection.starSystemPrime, connection.starSystemSecond))
                 return true;
         }
