@@ -42,7 +42,7 @@ public class Game {
 
             synchronized (LOCK) {
                 try {
-                    System.out.println("Waiting");
+//                    System.out.println("Waiting");
                     long waitTime = gameSpeed + startTime - System.currentTimeMillis();
                     LOCK.wait(waitTime > 0 ? waitTime : 0);
                 } catch (Exception e) {
