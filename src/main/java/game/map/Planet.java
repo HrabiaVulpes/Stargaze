@@ -1,10 +1,12 @@
 package game.map;
 
+import game.player.Player;
+
 public class Planet extends MapElement {
    public Integer level = 1;
    public StarSystem whereIsPlanet;
 
-   public Planet(String owner, StarSystem system) {
+   public Planet(Player owner, StarSystem system) {
       super(owner);
       this.whereIsPlanet = system;
    }

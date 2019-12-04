@@ -6,6 +6,7 @@ import game.map.StarSystem;
 import game.player.Player;
 import game.ship.Ship;
 
+import java.awt.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,11 +33,11 @@ public class OrderTakeSystem extends Order {
       StarSystem system = orderedShip.whereIsShip;
       Fortress systemFortress = CommonData.fortresses.stream()
               .filter(fortress -> fortress.whereIsFortress == system)
-              .findFirst().orElse(new Fortress("none", system));
+              .findFirst().orElse(new Fortress(new Player("none", Color.DARK_GRAY), system));
 
       Set<Ship> foreignShipsPresent = CommonData.ships.stream()
               .filter(ship -> ship.whereIsShip == system)
-              .filter(ship -> !ship.owner.equals(owner.name))
+              .filter(ship -> !(ship.owner == owner))
               .collect(Collectors.toSet());
 
       if (systemFortress.fortifiedLevel <= 0 && foreignShipsPresent.size() == 0) {

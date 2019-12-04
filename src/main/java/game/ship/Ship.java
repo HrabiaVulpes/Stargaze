@@ -14,7 +14,7 @@ public class Ship extends MapElement {
    public StarSystem whereWasShip;
 
    public Ship(Player owner, ShipTypes shipType, StarSystem whereIsShip) {
-      super(owner.name);
+      super(owner);
       this.shipType = shipType;
       defences = owner.defencesTech;
       offences = owner.offencesTech;

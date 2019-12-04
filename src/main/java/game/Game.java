@@ -1,10 +1,7 @@
 package game;
 
 import game.gui.BaseGUI;
-import game.map.Fortress;
-import game.map.Galaxy;
-import game.map.GalaxyGenerator;
-import game.map.StarSystem;
+import game.map.*;
 import game.player.Player;
 import game.player.orders.Order;
 import game.player.orders.OrderError;
@@ -12,6 +9,7 @@ import game.player.orders.OrderType;
 import game.ship.Ship;
 import game.ship.ShipTypes;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -55,13 +53,12 @@ public class Game {
     }
 
     private void initData() {
-        galaxy = new Galaxy(GalaxyGenerator.generateGalaxy(mapWidth, mapHeight));
+        galaxy = new Galaxy(PremadeGalaxyGenerator.generateGalaxy(mapWidth, mapHeight));
 
-        players.add(new Player("Red"));
-        players.add(new Player("Green"));
-        players.add(new Player("Blue"));
-        players.add(new Player("Black"));
-        players.add(new Player("White"));
+        players.add(new Player("Red", Color.RED));
+        players.add(new Player("Green", Color.GREEN));
+        players.add(new Player("Blue", Color.BLUE));
+        players.add(new Player("Cyan", Color.CYAN));
 
         StarSystem system = galaxy.starSystems.stream().findAny().orElseThrow(NoSuchElementException::new);
         ships.add(new Ship(players.get(0), ShipTypes.CORVETTE, system));

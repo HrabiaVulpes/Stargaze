@@ -2,15 +2,19 @@ package game.player;
 
 import game.CommonData;
 
+import java.awt.*;
+
 public class Player {
     public String name;
+    public Color color;
 
     public long money = 0;
     public int offencesTech = 0;
     public int defencesTech = 0;
 
-    public Player(String name) {
+    public Player(String name, Color color) {
         this.name = name;
+        this.color = color;
     }
 
     public long getIncome() {

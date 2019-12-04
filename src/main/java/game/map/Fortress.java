@@ -1,13 +1,14 @@
 package game.map;
 
 import game.CommonData;
+import game.player.Player;
 
 public class Fortress extends MapElement {
    public Integer level = 0;
    public Integer fortifiedLevel = 0;
    public StarSystem whereIsFortress;
 
-   public Fortress(String owner, StarSystem whereIsFortress) {
+   public Fortress(Player owner, StarSystem whereIsFortress) {
       super(owner);
       this.whereIsFortress = whereIsFortress;
    }

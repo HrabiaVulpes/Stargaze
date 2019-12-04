@@ -1,13 +1,17 @@
 package game.map;
 
+import game.player.Player;
+
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class StarSystem {
-   public final String ID;
+   public String ID;
    public Integer distance = -1;
    private Set<StarSystem> connections;
-   private String owner = "";
+   private Player owner = new Player("none", Color.DARK_GRAY);
    private int x;
    private int y;
 
@@ -15,6 +19,13 @@ public class StarSystem {
       this.x = x;
       this.y = y;
       ID = UUID.randomUUID().toString();
+      connections = new HashSet<>();
+   }
+
+   public StarSystem(int x, int y, String ID) {
+      this.x = x;
+      this.y = y;
+      this.ID = ID;
       connections = new HashSet<>();
    }
 
@@ -34,11 +45,11 @@ public class StarSystem {
       this.connections.add(connection);
    }
 
-   public String getOwner() {
+   public Player getOwner() {
       return owner;
    }
 
-   public void setOwner(String owner) {
+   public void setOwner(Player owner) {
       this.owner = owner;
    }
 
