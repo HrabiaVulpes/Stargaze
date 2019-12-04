@@ -87,8 +87,7 @@ public class MapPanel extends JPanel {
                  .forEach(
                          player -> {
                             g2d.setColor(player.color);
-                            g2d.fillOval(x - elementSize, y - elementSize, x, y);
-                            offset[0] += elementSize / 2;
+                            g2d.fillOval(x - elementSize, y - elementSize, elementSize, elementSize);
                          }
                  );
       }

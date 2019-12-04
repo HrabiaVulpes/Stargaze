@@ -1,5 +1,9 @@
 package game.map;
 
+import game.CommonData;
+import game.player.Player;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +34,13 @@ public class PremadeGalaxyGenerator {
             for (StarSystem connection : connections){
                current.addConnection(connection);
             }
+         }
+      }
+
+      for (int i = 0; i < 10; i+=3) {
+         for (int j = 0; j < 10; j+=3) {
+            Planet planet = new Planet(new Player("none", Color.darkGray), findByID(result, id(i,j)));
+            CommonData.planets.add(planet);
          }
       }
 
