@@ -18,8 +18,8 @@ public class ConnectionCalculator {
     // Given three colinear points s1, s2, s3, the function checks if
     // point s2 lies on line segment 'pr'
     static boolean onSegment(StarSystem s1, StarSystem s2, StarSystem s3) {
-        if (s2.getX() <= Math.max(s1.getX(), s3.getX()) && s2.getX() >= Math.min(s1.getX(), s3.getX()) &&
-            s2.getY() <= Math.max(s1.getY(), s3.getY()) && s2.getY() >= Math.min(s1.getY(), s3.getY())) { return true; }
+        if (s2.getX() < Math.max(s1.getX(), s3.getX()) && s2.getX() > Math.min(s1.getX(), s3.getX()) &&
+            s2.getY() < Math.max(s1.getY(), s3.getY()) && s2.getY() > Math.min(s1.getY(), s3.getY())) { return true; }
 
         return false;
     }
@@ -34,20 +34,21 @@ public class ConnectionCalculator {
         int o4 = orientation(p2, q2, q1);
 
         // General case
-        if (o1 != o2 && o3 != o4) { return true; }
+        if(o1 !=0 && o2!=0 && o3!=0 && o4 != 0) {
+            if (o1 != o2 && o3 != o4) { return true; }
+        }
+            // Special Cases
+            // p1, q1 and p2 are colinear and p2 lies on segment p1q1
+            if (o1 == 0 && onSegment(p1, p2, q1)) { return true; }
 
-        // Special Cases
-        // p1, q1 and p2 are colinear and p2 lies on segment p1q1
-        if (o1 == 0 && onSegment(p1, p2, q1)) { return true; }
+            // p1, q1 and q2 are colinear and q2 lies on segment p1q1
+            if (o2 == 0 && onSegment(p1, q2, q1)) { return true; }
 
-        // p1, q1 and q2 are colinear and q2 lies on segment p1q1
-        if (o2 == 0 && onSegment(p1, q2, q1)) { return true; }
+            // p2, q2 and p1 are colinear and p1 lies on segment p2q2
+            if (o3 == 0 && onSegment(p2, p1, q2)) { return true; }
 
-        // p2, q2 and p1 are colinear and p1 lies on segment p2q2
-        if (o3 == 0 && onSegment(p2, p1, q2)) { return true; }
-
-        // p2, q2 and q1 are colinear and q1 lies on segment p2q2
-        if (o4 == 0 && onSegment(p2, q1, q2)) { return true; }
+            // p2, q2 and q1 are colinear and q1 lies on segment p2q2
+            if (o4 == 0 && onSegment(p2, q1, q2)) { return true; }
 
         return false; // Doesn't fall in any of the above cases
     }
