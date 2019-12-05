@@ -1,5 +1,8 @@
 package game.map;
 
+import game.map.heperForGalaxyGenerator.Connection;
+import game.map.heperForGalaxyGenerator.Net;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,35 +12,54 @@ public class GalaxyGenerator {
 
     static Set<Connection> connections = new HashSet<>();
 
-    private static int numberBetween(int a, int b) {
-        return (int) (Math.random() * (b - a) + a);
-    }
-
     public static Set<StarSystem> generateGalaxy(int width, int height) {
         Set<StarSystem> result = new HashSet<>();
-        StarSystem baseSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
-        StarSystem childSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
-        for (int i = 0; i < MapSetting.numberOfStars; i++) {
-            while (!isStarSystemClose(baseSystem, childSystem, MapSetting.maxLengthOfConnection) ||
-                   isConnectionCross(childSystem, baseSystem)){
-                System.out.println("problem");
-                childSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
+        Net net = new Net(0, 100);
+        StarSystem base = net.myNet.get(0).randomSystemInSquare();
+        StarSystem child = net.myNet.get(1).randomSystemInSquare();
+        for (int i = 1; i < net.myNet.size() - 2; i++) {
+            while (isConnectionCross(child, base)) {
+                child = net.myNet.get(i + 1).randomSystemInSquare();
+                System.out.println("a");
             }
-            connections.add(new Connection(baseSystem, childSystem));
-            baseSystem.addConnection(childSystem);
-            result.add(baseSystem);
-            baseSystem = childSystem;
-            System.out.println("a");
-        }
+            base.addConnection(child);
+            connections.add(new Connection(base, child));
+            result.add(base);
+            base = child;
+            child = net.myNet.get(i + 2).randomSystemInSquare();
 
-        result.add(childSystem);
-        createCloseConnection(result, MapSetting.closeConnection);
+
+        }
+        //        StarSystem baseSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
+        //        StarSystem childSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
+        //        for (int i = 0; i < MapSetting.numberOfStars; i++) {
+        //            while (!isStarSystemClose(baseSystem, childSystem, MapSetting.maxLengthOfConnection) || !isStarSystemTooClose(baseSystem, childSystem, MapSetting.tooCloseConnection)||
+        //                   isConnectionCross(childSystem, baseSystem)) {
+        //                System.out.println("problem");
+        //                childSystem = new StarSystem(numberBetween(0, width), numberBetween(0, height));
+        //            }
+        //            connections.add(new Connection(baseSystem, childSystem));
+        //            baseSystem.addConnection(childSystem);
+        //            result.add(baseSystem);
+        //            baseSystem = childSystem;
+        //            System.out.println("a");
+        //        }
+        //
+        //        result.add(childSystem);
+        //        //createCloseConnection(result, MapSetting.closeConnection);
         //connectTwoNearestStarSystem(result);
+        createCloseConnection(result, MapSetting.closeConnection);
         return result;
     }
 
     static boolean isStarSystemClose(StarSystem s1, StarSystem s2, int distance) {
         return distance >= (s1.getX() - s2.getX()) * (s1.getX() - s2.getX()) + (s1.getY() - s2.getY()) * (s1.getY() - s2
+                .getY()) &&
+               s1 != s2;
+    }
+
+    static boolean isStarSystemTooClose(StarSystem s1, StarSystem s2, int distance) {
+        return distance < (s1.getX() - s2.getX()) * (s1.getX() - s2.getX()) + (s1.getY() - s2.getY()) * (s1.getY() - s2
                 .getY()) &&
                s1 != s2;
     }
@@ -54,8 +76,8 @@ public class GalaxyGenerator {
 
                 }
             }
-            if (nearestStarSystem != null)
-            { s1.addConnection(nearestStarSystem);
+            if (nearestStarSystem != null) {
+                s1.addConnection(nearestStarSystem);
             }
         }
 
@@ -64,7 +86,7 @@ public class GalaxyGenerator {
     static void createCloseConnection(Set<StarSystem> starSystems, int distance) {
         starSystems.forEach(s1 -> {
             starSystems.forEach(s2 -> {
-                if (isStarSystemClose(s1, s2, distance) && !isConnectionCross(s1, s2)) {
+                if (isStarSystemClose(s1, s2, distance) && !isConnectionCross(s1, s2) && Math.random() > 0.7 ) {
                     s2.addConnection(s1);
                     connections.add(new Connection(s1, s2));
                 }
@@ -81,8 +103,9 @@ public class GalaxyGenerator {
 
     static boolean isConnectionCross(StarSystem s1, StarSystem s2) {
         for (Connection connection : connections) {
-            if(ConnectionCalculator.doIntersect(s1,s2,connection.starSystemPrime, connection.starSystemSecond))
+            if (ConnectionCalculator.doIntersect(s1, s2, connection.starSystemPrime, connection.starSystemSecond)) {
                 return true;
+            }
         }
         return false;
     }

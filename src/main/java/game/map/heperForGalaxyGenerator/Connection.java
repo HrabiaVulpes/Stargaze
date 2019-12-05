@@ -1,14 +1,16 @@
-package game.map;
+package game.map.heperForGalaxyGenerator;
+
+import game.map.StarSystem;
 
 public class Connection {
     //this is for function description from y = ax + b
     int a;
     int b;
     boolean vertical;
-    StarSystem starSystemPrime;
-    StarSystem starSystemSecond;
+    public StarSystem starSystemPrime;
+    public StarSystem starSystemSecond;
 
-    Connection(StarSystem starSystemPrime, StarSystem starSystemSecond) {
+    public Connection(StarSystem starSystemPrime, StarSystem starSystemSecond) {
         this.starSystemPrime = starSystemPrime;
         this.starSystemSecond = starSystemSecond;
     }
