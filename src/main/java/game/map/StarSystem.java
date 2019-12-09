@@ -3,6 +3,7 @@ package game.map;
 import game.player.Player;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -90,5 +91,10 @@ public class StarSystem extends MapElement{
 
    public void setY(int y) {
       this.y = y;
+   }
+
+   @Override
+   public Shape shape(int offset) {
+      return new Ellipse2D.Double(getX() - elementSize/2.0, getY() - elementSize/2.0, elementSize, elementSize);
    }
 }

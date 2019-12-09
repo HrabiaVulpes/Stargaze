@@ -5,6 +5,8 @@ import game.map.MapElement;
 import game.map.StarSystem;
 import game.player.Player;
 
+import java.awt.*;
+
 public class Ship extends MapElement {
    public ShipTypes shipType;
    public Integer defences = 0;
@@ -33,5 +35,14 @@ public class Ship extends MapElement {
    public void move(StarSystem destination) {
       whereWasShip = whereIsShip;
       whereIsShip = destination;
+   }
+
+   @Override
+   public Shape shape(int offset) {
+      Polygon polygon = new Polygon();
+      polygon.xpoints = new int[]{whereIsShip.getX() + elementSize / 2 + offset, whereIsShip.getX() + elementSize + offset, whereIsShip.getX() + offset};
+      polygon.ypoints = new int[]{whereIsShip.getY() - elementSize, whereIsShip.getY(), whereIsShip.getY()};
+      polygon.npoints = 3;
+      return polygon;
    }
 }
