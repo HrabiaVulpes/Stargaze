@@ -5,7 +5,7 @@ import game.player.Player;
 import java.util.UUID;
 
 public class MapElement {
-   public final String ID;
+   public String ID;
    public Player owner;
    public boolean orderedAlready = false;
 

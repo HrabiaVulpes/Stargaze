@@ -5,10 +5,12 @@ import game.map.StarSystem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MapPanel extends JPanel {
+public class MapPanel extends JPanel implements MouseListener {
    Set<StarSystem> galaxy;
    private int elementSize = 15;
    private int systemSize = 10;
@@ -97,5 +99,30 @@ public class MapPanel extends JPanel {
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
       doDrawing(g);
+   }
+
+   @Override
+   public void mouseClicked(MouseEvent mouseEvent) {
+
+   }
+
+   @Override
+   public void mousePressed(MouseEvent mouseEvent) {
+
+   }
+
+   @Override
+   public void mouseReleased(MouseEvent mouseEvent) {
+
+   }
+
+   @Override
+   public void mouseEntered(MouseEvent mouseEvent) {
+
+   }
+
+   @Override
+   public void mouseExited(MouseEvent mouseEvent) {
+
    }
 }

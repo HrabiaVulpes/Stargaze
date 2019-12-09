@@ -7,22 +7,21 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StarSystem {
-   public String ID;
+public class StarSystem extends MapElement{
    public Integer distance = -1;
    private Set<StarSystem> connections;
-   private Player owner = new Player("none", Color.DARK_GRAY);
    private int x;
    private int y;
 
    public StarSystem(int x, int y) {
+      super(new Player("none", Color.DARK_GRAY));
       this.x = x;
       this.y = y;
-      ID = UUID.randomUUID().toString();
       connections = new HashSet<>();
    }
 
    public StarSystem(int x, int y, String ID) {
+      super(new Player("none", Color.DARK_GRAY));
       this.x = x;
       this.y = y;
       this.ID = ID;
@@ -31,10 +30,6 @@ public class StarSystem {
 
    public Set<StarSystem> getConnections() {
       return connections;
-   }
-
-   public void setConnections(Set<StarSystem> connections) {
-      this.connections = connections;
    }
 
    public void addConnection(StarSystem connection) {
