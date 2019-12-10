@@ -1,12 +1,15 @@
 package game.gui;
 
 import game.CommonData;
+import game.map.MapElement;
 import game.map.StarSystem;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,6 +18,7 @@ public class MapPanel extends JPanel implements MouseListener {
 
    public MapPanel(Set<StarSystem> galaxy) {
       this.galaxy = galaxy;
+      this.addMouseListener(this);
       setSize(CommonData.mapWidth, CommonData.mapHeight);
       Thread gameThread = new Thread(() -> {
          while (CommonData.continueGame) {
@@ -45,7 +49,7 @@ public class MapPanel extends JPanel implements MouseListener {
          CommonData.ships.stream().filter(ship -> ship.owner == player).forEach(ship -> g2d.fill(ship.shape(offset[0])));
          CommonData.fortresses.stream().filter(fortress -> fortress.owner == player).forEach(fortress -> g2d.fill(fortress.shape(offset[0])));
          CommonData.planets.stream().filter(planet -> planet.owner == player).forEach(planet -> g2d.fill(planet.shape(offset[0])));
-         offset[0] += 5;
+         offset[0] += 1;
       });
    }
 
@@ -57,7 +61,19 @@ public class MapPanel extends JPanel implements MouseListener {
 
    @Override
    public void mouseClicked(MouseEvent mouseEvent) {
+      List<MapElement> clickedElements = new ArrayList<>();
+      clickedElements.addAll(galaxy.stream().filter(system -> system.shape(0).contains(mouseEvent.getX(), mouseEvent.getY())).collect(Collectors.toList()));
+      clickedElements.addAll(CommonData.ships.stream().filter(ship -> ship.shape(0).contains(mouseEvent.getX(), mouseEvent.getY())).collect(Collectors.toList()));
+      clickedElements.addAll(CommonData.fortresses.stream().filter(fortress -> fortress.shape(0).contains(mouseEvent.getX(), mouseEvent.getY())).collect(Collectors.toList()));
+      clickedElements.addAll(CommonData.planets.stream().filter(planet -> planet.shape(0).contains(mouseEvent.getX(), mouseEvent.getY())).collect(Collectors.toList()));
 
+      if (SwingUtilities.isLeftMouseButton(mouseEvent)) {
+         LeftClickMenu leftClickMenu = new LeftClickMenu(clickedElements);
+         leftClickMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
+      } else if (SwingUtilities.isRightMouseButton(mouseEvent)) {
+         RightClickMenu rightClickMenu = new RightClickMenu(clickedElements);
+         rightClickMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
+      }
    }
 
    @Override
