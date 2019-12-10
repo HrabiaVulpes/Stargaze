@@ -67,12 +67,14 @@ public class MapPanel extends JPanel implements MouseListener {
       clickedElements.addAll(CommonData.fortresses.stream().filter(fortress -> fortress.shape(0).contains(mouseEvent.getX(), mouseEvent.getY())).collect(Collectors.toList()));
       clickedElements.addAll(CommonData.planets.stream().filter(planet -> planet.shape(0).contains(mouseEvent.getX(), mouseEvent.getY())).collect(Collectors.toList()));
 
-      if (SwingUtilities.isLeftMouseButton(mouseEvent)) {
-         LeftClickMenu leftClickMenu = new LeftClickMenu(clickedElements);
-         leftClickMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
-      } else if (SwingUtilities.isRightMouseButton(mouseEvent)) {
-         RightClickMenu rightClickMenu = new RightClickMenu(clickedElements);
-         rightClickMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
+      if (!clickedElements.isEmpty()) {
+         if (SwingUtilities.isLeftMouseButton(mouseEvent)) {
+            LeftClickMenu leftClickMenu = new LeftClickMenu(clickedElements);
+            leftClickMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
+         } else if (SwingUtilities.isRightMouseButton(mouseEvent)) {
+            RightClickMenu rightClickMenu = new RightClickMenu(clickedElements);
+            rightClickMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
+         }
       }
    }
 
