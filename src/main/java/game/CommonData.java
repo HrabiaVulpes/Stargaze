@@ -29,7 +29,7 @@ public class CommonData {
    public static List<Order> futureOrders = new ArrayList<>();
    public static Set<Planet> planets = new HashSet<>();
    public static Set<Fortress> fortresses = new HashSet<>();
-   public static volatile List<Ship> ships = new ArrayList<>();
+   public static List<Ship> ships = new ArrayList<>();
 
    public static void initData() {
       Player red = new Player("Red", Color.RED);

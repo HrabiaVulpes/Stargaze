@@ -39,7 +39,7 @@ public class SelectedElement extends JPanel {
             }
             try {
                Thread.sleep(1000 / 24);  // milliseconds
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException ignored) {
             }
          }
       });

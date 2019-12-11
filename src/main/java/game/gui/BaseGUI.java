@@ -10,9 +10,6 @@ import static game.CommonData.*;
 
 public class BaseGUI extends JFrame implements Runnable {
    private static Object LOCK = new Object();
-   JPanel mapPanel;
-   JPanel playerDataPanel;
-   JPanel selectedPanel;
 
    public BaseGUI() {
       initUI();
@@ -30,9 +27,9 @@ public class BaseGUI extends JFrame implements Runnable {
       JPanel mainPanel = new JPanel();
       mainPanel.setLayout(new BorderLayout());
 
-      mapPanel = new MapPanel(CommonData.galaxy.starSystems);
-      playerDataPanel = new PlayerDataPanel(CommonData.players.get(0));
-      selectedPanel = new SelectedElement(selected);
+      JPanel mapPanel = new MapPanel(CommonData.galaxy.starSystems);
+      JPanel playerDataPanel = new PlayerDataPanel(CommonData.players.get(0));
+      JPanel selectedPanel = new SelectedElement(selected);
 
       mainPanel.add(selectedPanel, BorderLayout.EAST);
       mainPanel.add(mapPanel, BorderLayout.CENTER);

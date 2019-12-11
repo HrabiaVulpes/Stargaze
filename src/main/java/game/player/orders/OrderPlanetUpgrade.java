@@ -18,7 +18,7 @@ public class OrderPlanetUpgrade extends Order {
    @Override
    public void runOrder() throws OrderError {
       Planet orderedPlanet = CommonData.planets.stream()
-              .filter(planet -> planet.owner.equals(owner.name))
+              .filter(planet -> planet.owner == owner)
               .filter(planet -> planet.ID.equals(planetID))
               .findFirst().orElseThrow(() -> new OrderError("Planet " + planetID + " not found!"));
 

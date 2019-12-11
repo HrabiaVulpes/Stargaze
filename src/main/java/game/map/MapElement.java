@@ -1,9 +1,9 @@
 package game.map;
 
+import game.Utils;
 import game.player.Player;
 
 import java.awt.*;
-import java.util.UUID;
 
 public abstract class MapElement {
    public String ID;
@@ -14,7 +14,7 @@ public abstract class MapElement {
 
    public MapElement(Player owner) {
       this.owner = owner;
-      ID = UUID.randomUUID().toString();
+      ID = "" + Utils.nextID();
    }
 
    public abstract Shape shape(int offset);

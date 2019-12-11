@@ -23,7 +23,7 @@ public class OrderTakeSystem extends Order {
    @Override
    public void runOrder() throws OrderError {
       Ship orderedShip = CommonData.ships.stream()
-              .filter(ship -> ship.owner.equals(owner.name))
+              .filter(ship -> ship.owner == owner)
               .filter(ship -> ship.ID.equals(shipID))
               .findFirst().orElseThrow(() -> new OrderError("Ship " + shipID + " not found!"));
 

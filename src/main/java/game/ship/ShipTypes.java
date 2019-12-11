@@ -1,5 +1,7 @@
 package game.ship;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 public enum ShipTypes {
    CORVETTE(1, 4),
    FRIGATE(2, 6),
@@ -21,5 +23,21 @@ public enum ShipTypes {
 
    public Integer getDice() {
       return dice;
+   }
+
+   public static ShipTypes bySize(int size){
+      switch (size){
+         case 1:
+            return CORVETTE;
+         case 2:
+            return FRIGATE;
+         case 3:
+            return DESTROYER;
+         case 4:
+            return CRUISER;
+         case 5:
+            return BATTLESHIP;
+      }
+      return CORVETTE;
    }
 }
