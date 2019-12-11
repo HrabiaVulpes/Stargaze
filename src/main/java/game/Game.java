@@ -14,7 +14,7 @@ import static game.CommonData.*;
 
 public class Game {
    private static Object LOCK = new Object();
-   BaseGUI baseGUI;
+   private BaseGUI baseGUI;
 
    public void mainLoop() {
       initData();
@@ -35,7 +35,6 @@ public class Game {
 
          synchronized (LOCK) {
             try {
-               System.out.println("Waiting");
                long waitTime = gameSpeed + startTime - System.currentTimeMillis();
                LOCK.wait(waitTime > 0 ? waitTime : 0);
             } catch (Exception e) {
@@ -71,10 +70,6 @@ public class Game {
    private void movement() {
       doOrdersByType(OrderType.SHIP_MOVE);
       orders = orders.stream().filter(order -> order.type != OrderType.SHIP_MOVE).collect(Collectors.toList());
-
-//        for (Ship ship : ships) {
-//            System.out.println("Ship: " + ship.whereIsShip.getX() + ", " + ship.whereIsShip.getY());
-//        }
    }
 
    private void warfare() {

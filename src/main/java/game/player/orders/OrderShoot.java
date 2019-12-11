@@ -4,6 +4,8 @@ import game.CommonData;
 import game.player.Player;
 import game.ship.Ship;
 
+import java.util.Collections;
+
 public class OrderShoot extends Order {
    private String attackerID;
    private String defenderID;
@@ -12,6 +14,8 @@ public class OrderShoot extends Order {
       super(owner, OrderType.SHIP_SHOOT);
       this.attackerID = attackerID;
       this.defenderID = defenderID;
+      connectedMapElements = Collections.singletonList(CommonData.ships.stream().filter(ship -> ship.ID.equals(attackerID)).findFirst().orElse(null));
+      connectedMapElements = Collections.singletonList(CommonData.ships.stream().filter(ship -> ship.ID.equals(defenderID)).findFirst().orElse(null));
    }
 
    @Override

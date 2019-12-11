@@ -7,6 +7,7 @@ import game.player.Player;
 import game.ship.Ship;
 
 import java.awt.*;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ public class OrderTakeSystem extends Order {
    public OrderTakeSystem(Player owner, String shipID) {
       super(owner, OrderType.SHIP_TAKE_SYSTEM);
       this.shipID = shipID;
+      connectedMapElements = Collections.singletonList(CommonData.ships.stream().filter(ship -> ship.ID.equals(shipID)).findFirst().orElse(null));
    }
 
    @Override

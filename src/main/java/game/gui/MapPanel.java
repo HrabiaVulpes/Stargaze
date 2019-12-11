@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MapPanel extends JPanel implements MouseListener {
-   Set<StarSystem> galaxy;
+   private Set<StarSystem> galaxy;
 
    public MapPanel(Set<StarSystem> galaxy) {
       this.galaxy = galaxy;
@@ -75,7 +75,7 @@ public class MapPanel extends JPanel implements MouseListener {
             RightClickMenu rightClickMenu = new RightClickMenu(clickedElements);
             rightClickMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
          }
-      }
+      }else CommonData.selected = null;
    }
 
    @Override

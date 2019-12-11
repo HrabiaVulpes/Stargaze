@@ -5,6 +5,8 @@ import game.map.StarSystem;
 import game.player.Player;
 import game.ship.Ship;
 
+import java.util.Collections;
+
 public class OrderMove extends Order {
    private String shipID;
    private String destinationID;
@@ -13,6 +15,7 @@ public class OrderMove extends Order {
       super(owner, OrderType.SHIP_MOVE);
       this.shipID = shipID;
       this.destinationID = destinationID;
+      connectedMapElements = Collections.singletonList(CommonData.ships.stream().filter(ship -> ship.ID.equals(shipID)).findFirst().orElse(null));
    }
 
    @Override

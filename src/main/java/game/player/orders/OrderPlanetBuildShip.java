@@ -6,6 +6,8 @@ import game.player.Player;
 import game.ship.Ship;
 import game.ship.ShipTypes;
 
+import java.util.Collections;
+
 public class OrderPlanetBuildShip extends Order {
    private String planetID;
    private ShipTypes shipType;
@@ -14,6 +16,7 @@ public class OrderPlanetBuildShip extends Order {
       super(owner, OrderType.PLANET_BUILD_SHIP);
       this.planetID = planetID;
       this.shipType = shipType;
+      connectedMapElements = Collections.singletonList(CommonData.planets.stream().filter(planet -> planet.ID.equals(planetID)).findFirst().orElse(null));
    }
 
    @Override

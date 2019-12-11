@@ -2,6 +2,7 @@ package game;
 
 import game.map.Fortress;
 import game.map.Galaxy;
+import game.map.MapElement;
 import game.map.Planet;
 import game.player.Player;
 import game.player.diplomacy.Message;
@@ -18,6 +19,7 @@ public class CommonData {
    public static final int mapWidth = 1000;
    public static final int mapHeight = 700;
 
+   public static MapElement selected = null;
    public static Boolean continueGame = true;
    public static Long gameSpeed = 1000L;                 // miliseconds per turn
    public static List<Player> players = new ArrayList<>();

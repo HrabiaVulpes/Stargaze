@@ -4,12 +4,15 @@ import game.CommonData;
 import game.map.Planet;
 import game.player.Player;
 
+import java.util.Collections;
+
 public class OrderPlanetDowngrade extends Order {
    private String planetID;
 
    public OrderPlanetDowngrade(Player owner, String planetID) {
       super(owner, OrderType.PLANET_DOWNGRADE);
       this.planetID = planetID;
+      connectedMapElements = Collections.singletonList(CommonData.planets.stream().filter(planet -> planet.ID.equals(planetID)).findFirst().orElse(null));
    }
 
    @Override
