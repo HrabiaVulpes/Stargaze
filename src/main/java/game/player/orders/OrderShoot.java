@@ -21,7 +21,7 @@ public class OrderShoot extends Order {
    @Override
    public void runOrder() throws OrderError {
       Ship attacker = CommonData.ships.stream()
-              .filter(ship -> ship.owner.equals(owner.name))
+              .filter(ship -> ship.owner == owner)
               .filter(ship -> ship.ID.equals(attackerID))
               .findFirst().orElseThrow(() -> new OrderError("Ship " + attackerID + " not found!"));
 

@@ -34,29 +34,17 @@ public class CommonData {
    public static void initData() {
       Player red = new Player("Red", Color.RED);
       Player green = new Player("Green", Color.GREEN);
-      Player blue = new Player("Blue", Color.BLUE);
-      Player cyan = new Player("Cyan", Color.CYAN);
       players.add(red);
       players.add(green);
-      players.add(blue);
-      players.add(cyan);
 
       try {
-         galaxy.getSystemByID("00").setOwner(red);
-         planets.stream().filter(planet -> planet.whereIsPlanet.ID.equals("00")).forEach(planet -> planet.owner = red);
-         ships.add(new Ship(red, ShipTypes.CORVETTE, galaxy.getSystemByID("00")));
+         galaxy.getSystemByID("1").setOwner(red);
+         planets.stream().filter(planet -> planet.whereIsPlanet.ID.equals("1")).forEach(planet -> planet.owner = red);
+         ships.add(new Ship(red, ShipTypes.CORVETTE, galaxy.getSystemByID("1")));
 
-         galaxy.getSystemByID("09").setOwner(green);
-         planets.stream().filter(planet -> planet.whereIsPlanet.ID.equals("09")).forEach(planet -> planet.owner = green);
-         ships.add(new Ship(green, ShipTypes.CORVETTE, galaxy.getSystemByID("09")));
-
-         galaxy.getSystemByID("90").setOwner(blue);
-         planets.stream().filter(planet -> planet.whereIsPlanet.ID.equals("90")).forEach(planet -> planet.owner = blue);
-         ships.add(new Ship(blue, ShipTypes.CORVETTE, galaxy.getSystemByID("90")));
-
-         galaxy.getSystemByID("99").setOwner(cyan);
-         planets.stream().filter(planet -> planet.whereIsPlanet.ID.equals("99")).forEach(planet -> planet.owner = cyan);
-         ships.add(new Ship(cyan, ShipTypes.CORVETTE, galaxy.getSystemByID("99")));
+         galaxy.getSystemByID("9").setOwner(green);
+         planets.stream().filter(planet -> planet.whereIsPlanet.ID.equals("9")).forEach(planet -> planet.owner = green);
+         ships.add(new Ship(green, ShipTypes.CORVETTE, galaxy.getSystemByID("9")));
 
       } catch (OrderError orderError) {
          System.out.println(orderError.getMessage());

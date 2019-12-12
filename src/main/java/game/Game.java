@@ -48,7 +48,7 @@ public class Game {
    }
 
    private void initData() {
-      galaxy = new Galaxy(PremadeGalaxyGenerator.generateGalaxy(mapWidth, mapHeight));
+      galaxy = new Galaxy(GalaxyGenerator.generateGalaxy(mapWidth, mapHeight));
       CommonData.initData();
    }
 
