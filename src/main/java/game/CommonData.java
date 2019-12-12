@@ -1,9 +1,6 @@
 package game;
 
-import game.map.Fortress;
-import game.map.Galaxy;
-import game.map.MapElement;
-import game.map.Planet;
+import game.map.*;
 import game.player.Player;
 import game.player.diplomacy.Message;
 import game.player.orders.Order;
@@ -60,8 +57,19 @@ public class CommonData {
 
    public static Fortress getFortressByOwnerAndID(Player owner, String ID) throws OrderError {
       return CommonData.fortresses.stream()
-              .filter(planet -> planet.owner == owner)
+              .filter(fortress -> fortress.owner == owner)
               .filter(fortress -> fortress.ID.equals(ID))
               .findFirst().orElseThrow(() -> new OrderError("Fortress " + ID + " not found!"));
+   }
+
+   public static Ship getShipByID(String ID) throws OrderError {
+      return CommonData.ships.stream()
+              .filter(ship -> ship.ID.equals(ID))
+              .findFirst().orElseThrow(() -> new OrderError("Ship " + ID + " not found!"));
+   }
+
+   public static StarSystem getSystemByID(String ID) throws OrderError{
+      return CommonData.galaxy.starSystems.stream().filter(starSystem -> starSystem.ID.equals(ID)).findFirst()
+              .orElseThrow(() -> new OrderError("System " + ID + " not found!"));
    }
 }

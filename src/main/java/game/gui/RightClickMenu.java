@@ -25,9 +25,19 @@ public class RightClickMenu extends JPopupMenu {
                addPlanetOrders(clickedElements);
                break;
             case "StarSystem":
+               addSystemOrders(clickedElements);
                break;
          }
       }
+   }
+
+   private void addSystemOrders(List<MapElement> clickedElements) {
+      add(new AbstractAction("Build fortress") {
+         @Override
+         public void actionPerformed(ActionEvent actionEvent) {
+            CommonData.orders.add(new OrderBuildFortress(CommonData.players.get(0), CommonData.selected.ID));
+         }
+      });
    }
 
    private void addPlanetOrders(List<MapElement> clickedElements) {
