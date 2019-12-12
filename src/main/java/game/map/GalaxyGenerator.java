@@ -23,6 +23,7 @@ public class GalaxyGenerator {
                 System.out.println("a");
             }
             base.addConnection(child);
+            child.addConnection(base);
             connections.add(new Connection(base, child));
             result.add(base);
             base = child;
@@ -88,6 +89,7 @@ public class GalaxyGenerator {
             starSystems.forEach(s2 -> {
                 if (isStarSystemClose(s1, s2, distance) && !isConnectionCross(s1, s2) && Math.random() > 0.7 ) {
                     s2.addConnection(s1);
+                    s1.addConnection(s2);
                     connections.add(new Connection(s1, s2));
                 }
             });
