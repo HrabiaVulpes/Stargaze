@@ -6,6 +6,8 @@ import game.player.Player;
 
 import java.util.Collections;
 
+import static game.CommonData.getFortressByOwnerAndID;
+
 public class OrderFortressUpgrade extends Order {
    private String fortressID;
 
@@ -17,19 +19,16 @@ public class OrderFortressUpgrade extends Order {
 
    @Override
    public void runOrder() throws OrderError {
-      Fortress orderedfortress = CommonData.fortresses.stream()
-              .filter(fortress -> fortress.owner.equals(owner.name))
-              .filter(fortress -> fortress.ID.equals(fortressID))
-              .findFirst().orElseThrow(() -> new OrderError("Fortress " + fortressID + " not found!"));
+      Fortress orderedFortress = getFortressByOwnerAndID(owner, fortressID);
 
-      if (orderedfortress.orderedAlready) {
+      if (orderedFortress.orderedAlready) {
          reAddOrder();
          throw new OrderError("Fortress " + fortressID + " already moved!");
       }
 
-      if (owner.money >= orderedfortress.level) {
-         owner.money -= orderedfortress.level;
-         orderedfortress.upgrade();
+      if (owner.money >= orderedFortress.level) {
+         owner.money -= orderedFortress.level;
+         orderedFortress.upgrade();
       } else {
          throw new OrderError("Insufficient funds to upgrade fortress " + fortressID);
       }

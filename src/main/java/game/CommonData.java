@@ -50,4 +50,18 @@ public class CommonData {
          System.out.println(orderError.getMessage());
       }
    }
+
+   public static Planet getPlanetByOwnerAndID(Player owner, String ID) throws OrderError {
+      return CommonData.planets.stream()
+              .filter(planet -> planet.owner == owner)
+              .filter(planet -> planet.ID.equals(ID))
+              .findFirst().orElseThrow(() -> new OrderError("Planet " + ID + " not found!"));
+   }
+
+   public static Fortress getFortressByOwnerAndID(Player owner, String ID) throws OrderError {
+      return CommonData.fortresses.stream()
+              .filter(planet -> planet.owner == owner)
+              .filter(fortress -> fortress.ID.equals(ID))
+              .findFirst().orElseThrow(() -> new OrderError("Fortress " + ID + " not found!"));
+   }
 }

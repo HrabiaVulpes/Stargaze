@@ -6,6 +6,8 @@ import game.player.Player;
 
 import java.util.Collections;
 
+import static game.CommonData.getFortressByOwnerAndID;
+
 public class OrderFortressDowngrade extends Order {
    private String fortressID;
 
@@ -17,10 +19,7 @@ public class OrderFortressDowngrade extends Order {
 
    @Override
    public void runOrder() throws OrderError {
-      Fortress orderedFortress = CommonData.fortresses.stream()
-              .filter(fortress -> fortress.owner == owner)
-              .filter(fortress -> fortress.ID.equals(fortressID))
-              .findFirst().orElseThrow(() -> new OrderError("Fortress " + fortressID + " not found!"));
+      Fortress orderedFortress = getFortressByOwnerAndID(owner, fortressID);
 
       if (orderedFortress.orderedAlready) {
          reAddOrder();
