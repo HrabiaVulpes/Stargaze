@@ -13,6 +13,7 @@ public class Net {
         myNet = new ArrayList<Square>();
         spiralNet(side, shift);
         System.out.println(myNet.size());
+
     }
 
     private void normalNet(int side, int shift) {
