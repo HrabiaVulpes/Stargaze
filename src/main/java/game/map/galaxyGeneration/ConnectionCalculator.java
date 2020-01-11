@@ -1,0 +1,58 @@
+package game.map.galaxyGeneration;
+
+import game.map.StarSystem;
+
+public class ConnectionCalculator {
+    // To find orientation of ordered triplet (s1, s2, s3).
+    // The function returns following values
+    // 0 --> s1, s2, s3 are colinear
+    // 1 --> Clockwise
+    // 2 --> Counterclockwise
+    static int orientation(StarSystem s1, StarSystem s2, StarSystem s3) {
+        int val = (s2.getY() - s1.getY()) * (s3.getX() - s2.getX()) -
+                  (s2.getX() - s1.getX()) * (s3.getY() - s2.getY());
+        if (val == 0) {
+            return 0; // colinear
+        }
+        return (val > 0) ? 1 : 2; // clock or counterclock wise
+    }
+
+    // Given three colinear points s1, s2, s3, the function checks if
+    // point s2 lies on line segment 'pr'
+    static boolean onSegment(StarSystem s1, StarSystem s2, StarSystem s3) {
+        if (s2.getX() < Math.max(s1.getX(), s3.getX()) && s2.getX() > Math.min(s1.getX(), s3.getX()) &&
+            s2.getY() < Math.max(s1.getY(), s3.getY()) && s2.getY() > Math.min(s1.getY(), s3.getY())) { return true; }
+
+        return false;
+    }
+
+    public static boolean doIntersect(StarSystem p1, StarSystem q1, StarSystem p2, StarSystem q2) {
+
+        // Find the four orientations needed for general and
+        // special cases
+        int o1 = orientation(p1, q1, p2);
+        int o2 = orientation(p1, q1, q2);
+        int o3 = orientation(p2, q2, p1);
+        int o4 = orientation(p2, q2, q1);
+
+        // General case
+        if(o1 !=0 && o2!=0 && o3!=0 && o4 != 0) {
+            if (o1 != o2 && o3 != o4) { return true; }
+        }
+            // Special Cases
+            // p1, q1 and p2 are colinear and p2 lies on segment p1q1
+            if (o1 == 0 && onSegment(p1, p2, q1)) { return true; }
+
+            // p1, q1 and q2 are colinear and q2 lies on segment p1q1
+            if (o2 == 0 && onSegment(p1, q2, q1)) { return true; }
+
+            // p2, q2 and p1 are colinear and p1 lies on segment p2q2
+            if (o3 == 0 && onSegment(p2, p1, q2)) { return true; }
+
+            // p2, q2 and q1 are colinear and q1 lies on segment p2q2
+            if (o4 == 0 && onSegment(p2, q1, q2)) { return true; }
+
+        return false; // Doesn't fall in any of the above cases
+    }
+}
+

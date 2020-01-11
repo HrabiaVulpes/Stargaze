@@ -1,12 +1,14 @@
 package game.gui;
 
-import game.CommonData;
+import game.staticData.CommonData;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 
-import static game.CommonData.*;
+import static game.staticData.CommonData.*;
+import static game.staticData.MapSetting.mapHeight;
+import static game.staticData.MapSetting.mapWidth;
 
 public class BaseGUI extends JFrame implements Runnable {
    private static Object LOCK = new Object();

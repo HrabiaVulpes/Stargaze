@@ -1,7 +1,7 @@
 package game.map;
 
 import game.player.Player;
-import game.player.orders.OrderError;
+import game.orders.OrderError;
 
 import java.util.Set;
 import java.util.stream.Collectors;

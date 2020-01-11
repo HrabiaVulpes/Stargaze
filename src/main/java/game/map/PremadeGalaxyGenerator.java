@@ -1,6 +1,7 @@
 package game.map;
 
-import game.CommonData;
+import game.staticData.CommonData;
+import game.planet.Planet;
 import game.player.Player;
 
 import java.awt.*;

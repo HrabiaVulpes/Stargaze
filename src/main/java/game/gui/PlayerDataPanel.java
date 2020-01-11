@@ -1,6 +1,6 @@
 package game.gui;
 
-import game.CommonData;
+import game.staticData.CommonData;
 import game.player.Player;
 
 import javax.swing.*;

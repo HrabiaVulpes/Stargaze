@@ -1,6 +1,6 @@
 package game.gui;
 
-import game.CommonData;
+import game.staticData.CommonData;
 import game.map.MapElement;
 import game.map.StarSystem;
 
@@ -13,13 +13,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static game.staticData.MapSetting.mapHeight;
+import static game.staticData.MapSetting.mapWidth;
+
 public class MapPanel extends JPanel implements MouseListener {
    private Set<StarSystem> galaxy;
 
    public MapPanel(Set<StarSystem> galaxy) {
       this.galaxy = galaxy;
       this.addMouseListener(this);
-      setSize(CommonData.mapWidth, CommonData.mapHeight);
+      setSize(mapWidth, mapHeight);
       Thread gameThread = new Thread(() -> {
          while (CommonData.continueGame) {
             repaint();

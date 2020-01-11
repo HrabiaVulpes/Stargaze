@@ -1,8 +1,6 @@
-import game.map.ConnectionCalculator;
+import game.map.galaxyGeneration.ConnectionCalculator;
 import game.map.StarSystem;
-import org.junit.Assert;
 import org.junit.Test;
-import org.junit.Ignore;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;

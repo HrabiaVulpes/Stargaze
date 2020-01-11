@@ -1,17 +1,19 @@
 package game;
 
 import game.gui.BaseGUI;
-import game.map.Fortress;
+import game.fortress.Fortress;
 import game.map.Galaxy;
-import game.map.GalaxyGenerator;
-import game.map.StarSystem;
+import game.map.galaxyGeneration.GalaxyGenerator;
 import game.player.Player;
-import game.player.orders.OrderError;
-import game.player.orders.OrderType;
+import game.orders.OrderError;
+import game.orders.OrderType;
+import game.staticData.CommonData;
 
 import java.util.stream.Collectors;
 
-import static game.CommonData.*;
+import static game.staticData.CommonData.*;
+import static game.staticData.MapSetting.mapHeight;
+import static game.staticData.MapSetting.mapWidth;
 
 public class Game {
    private static Object LOCK = new Object();

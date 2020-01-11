@@ -1,6 +1,6 @@
 package game.gui;
 
-import game.CommonData;
+import game.staticData.CommonData;
 import game.map.MapElement;
 
 import javax.swing.*;

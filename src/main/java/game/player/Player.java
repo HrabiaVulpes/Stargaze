@@ -1,6 +1,6 @@
 package game.player;
 
-import game.CommonData;
+import game.staticData.CommonData;
 
 import java.awt.*;
 

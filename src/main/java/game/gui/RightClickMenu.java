@@ -1,9 +1,9 @@
 package game.gui;
 
-import game.CommonData;
+import game.staticData.CommonData;
 import game.map.MapElement;
-import game.map.Planet;
-import game.player.orders.*;
+import game.planet.Planet;
+import game.orders.*;
 import game.ship.ShipTypes;
 
 import javax.swing.*;
