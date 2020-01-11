@@ -1,4 +1,4 @@
-package game;
+package game.staticData;
 
 public class Utils {
    private static long id = 0;

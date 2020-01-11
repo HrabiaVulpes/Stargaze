@@ -1,6 +1,6 @@
 package game.ship;
 
-import game.Utils;
+import game.staticData.Utils;
 import game.map.MapElement;
 import game.map.StarSystem;
 import game.player.Player;

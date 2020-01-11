@@ -1,6 +1,6 @@
 package game.map;
 
-import game.Utils;
+import game.staticData.Utils;
 import game.player.Player;
 
 import java.awt.*;

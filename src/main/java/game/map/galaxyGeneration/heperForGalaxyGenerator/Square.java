@@ -2,7 +2,7 @@ package game.map.galaxyGeneration.heperForGalaxyGenerator;
 
 import game.map.StarSystem;
 
-import static game.Utils.numberBetween;
+import static game.staticData.Utils.numberBetween;
 
 public class Square {
     int column;
