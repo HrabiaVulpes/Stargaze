@@ -10,7 +10,7 @@ public abstract class MapElement {
    public Player owner;
    public boolean orderedAlready = false;
 
-   protected int elementSize = 15;
+   protected int elementSize = 3;
 
    public MapElement(Player owner) {
       this.owner = owner;
